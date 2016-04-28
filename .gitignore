@@ -1,0 +1,6 @@
+laa_dashboard/settings/local.py
+.idea
+*.pyc
+.DS_Store
+staticfiles/
+*.sqlite3
