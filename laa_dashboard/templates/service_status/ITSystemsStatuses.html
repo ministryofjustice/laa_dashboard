@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+{% load staticfiles %}
+
+<html>
+<head>
+
+<title>IT Service Statuses</title>
+
+
+<!--<link rel="stylesheet" type="text/css" href="../../static/service_status/inc/css/MLA.css" /> -->
+<link rel="stylesheet" href="{% static 'service_status/' %}inc/css/MLA.css" type="text/css" media="screen" />
+<style>
+.scrollable {
+	height: 340px;
+	overflow-y: auto;
+}
+
+</style>
+
+<!-- =================================================================== -->
+
+
+
+<img src="{% static 'service_status/' %}/logo_laa.gif">
+
+<hr style="border-bottom:5px solid red;" />
+
+<h1 style="text-align:center;color:black; font-weight:bold;font-style:italic">IT Services Statuses / Availability</h1>
+
+
+<script type="text/javascript">
+
+	//window.onload = getSpanValue
+
+//	function getSpanValue(){
+//		var tdTags = document.getElementsByTagName("td");
+//
+//		for (var x = 0; x < tdTags.length; x++) {
+//			var tdTagObj = tdTags[x];
+//			if (tdTagObj.id == "statusTD") {
+//
+//				var tdTagStr = tdTagObj.innerHTML;
+//				if (tdTagStr.indexOf("OK") > -1) {
+//
+//					tdTagObj.innerHTML = "<img width=\"20\" height=\"20\" style=\"border:0;\" src=\"{% static 'service_status/' %}/ok_tick.jpg\" />" +
+//								   "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+//								   "<span datafld=\"status\" style=\"text-align:left;\"></span> - " +
+//                                                   "No reported issues"; //tdTagStr;
+//
+//				} else if (tdTagStr.indexOf("WARN") > -1) {
+//
+//					tdTagObj.innerHTML = "<img width=\"20\" height=\"20\" style=\"border:0;\" src=\"{% static 'service_status/' %}/warning.jpg\" />" +
+//								   "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+//								   "<span datafld=\"status\" style=\"text-align:left;\"></span>ING - " +
+//                                                   "System experiencing service disruption"; //tdTagStr;
+//
+//				} else if (tdTagStr.indexOf("FAIL") > -1) {
+//
+//					tdTagObj.innerHTML = "<img width=\"20\" height=\"20\" style=\"border:0;\" src=\"{% static 'service_status/' %}/not_ok.jpg\" />" +
+//								   "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+//								   "<span datafld=\"status\" style=\"text-align:left;\"></span>ED - " +
+//                                                   "Severe system disruption/outage"; //tdTagStr;
+//
+//				}
+//			}
+//		}
+//
+//		now();
+//	}
+
+	function now(){
+		var today = new Date();
+		document.getElementById("dtText").innerHTML = today;
+	}
+
+</script>
+
+
+</head>
+
+
+<!--  ======================================================================================================================================  -->
+
+
+<body >
+
+<object ID=data classid="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" type="text">
+  <param name="DataURL" value="data.csv">
+  <param name="useHeader" value="true">
+</object>
+
+
+<div id="dtText" style="text-align:right;"></div>
+
+<div id="refresh" style="text-align:left;"><input type="button" id"refreshButton" value="Refresh" onclick="location.reload();"/> Click for the latest statuses</div>
+
+<!-- ======================================================================================================================= -->
+<hr>
+<div id="test" class="scrollable">
+
+ <table datasrc='#data' class="search_summary" style="width:100%; padding-left:10px; border-spacing:0; margin-left: 10px;">
+
+ <thead>
+
+  <tr style="height:5px;"></tr>
+
+  <tr>
+    <th style="width:25%;height:50px;text-align:center;font-weight:bold" >Service Name</th>
+    <th style="width:75%;text-align:center;font-weight:bold">Service Status</th>
+  </tr>
+
+ </thead>
+
+ <tbody>
+
+
+ {% for key, value in statuses.items %}
+ <tr>
+ 	<td style="height:50px;font-weight:bold"><a href="#"><span>{{key}}</span></a></td>
+	 <td id="statusTD" style="text-align:left; font-weight:bold;">
+		<span style="text-align:center;">{{value}}</span>
+	 </td>
+
+
+ </tr>
+ {% endfor %}
+
+ <!--<tr>-->
+	 <!--<td style="height:50px;font-weight:bold"><a href="#"><span datafld='system name'></span></a></td>-->
+	 <!--<td id="statusTD" style="text-align:left; font-weight:bold;">-->
+		<!--<span datafld='status' style="text-align:center;"></span>-->
+	 <!--</td>-->
+ <!--</tr>-->
+
+</tbody>
+
+<tfoot>
+	<tr>
+		<th colspan="4" style="text-align:center; font-weight:normal;">
+			<img width="20" height="20" style="border:0;" src="{% static 'service_status/' %}/ok_tick.jpg" />&nbsp;&nbsp; No reported issues
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="20" height="20" style="border:0;" src="{% static 'service_status/' %}/warning.jpg" />&nbsp;&nbsp; System experiencing service disruption
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width="20" height="20" style="border:0;" src="{% static 'service_status/' %}/not_ok.jpg" />&nbsp;&nbsp; Severe system disruption/outage
+		</th>
+	</tr>
+</tfoot>
+
+</table>
+
+
+</div>
+
+<br>
+
+
+</body>
+</html>

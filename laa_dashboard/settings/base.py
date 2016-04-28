@@ -11,21 +11,59 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
+from os.path import join, abspath, dirname
+import dj_database_url
+
+# PATH vars
+
+here = lambda *x: join(abspath(dirname(__file__)), *x)
+PROJECT_ROOT = here("..")
+root = lambda *x: join(abspath(PROJECT_ROOT), *x)
+
+sys.path.insert(0, root())
+sys.path.insert(0, root('apps'))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+print(BASE_DIR)
+
+# Alt paths stuff
+
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+#
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+#
+# # Extra places for collectstatic to find static files.
+# STATICFILES_DIRS = (
+#     os.path.join(PROJECT_ROOT, 'static'),
+#
+# )
+
+print(PROJECT_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c-q6b!@s+7202wk4-ay)!&qv(csftd5_!-5so+vi13thp&if(o'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+LOCKDOWN_PASSWORDS = (os.environ.get('VIEWER_PASSWORD'))
+
+# X_FRAME_OPTIONS = 'ALLOW'
+#
+# SECURE_CONTENT_TYPE_NOSNIFF = False
+#
+# SECURE_BROWSER_XSS_FILTER = False
 
 
 # Application definition
@@ -37,6 +75,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'service_status',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -55,7 +94,7 @@ ROOT_URLCONF = 'laa_dashboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [root('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,12 +113,30 @@ WSGI_APPLICATION = 'laa_dashboard.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'laa_dashboard',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+DATABASES = {}
+
+DATABASES['default'] =  dj_database_url.config(conn_max_age=500)
+
+
+# db_from_env = dj_database_url.config(conn_max_age=500)
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -115,7 +172,10 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+
+# .local.py overrides all the common settings.
+try:
+    from .local import *
+except ImportError:
+    pass

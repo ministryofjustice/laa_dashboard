@@ -1,1 +1,1 @@
-web: gunicorn zen_aggregator.wsgi --log-file -
+web: gunicorn laa_dashboard.wsgi --log-file -

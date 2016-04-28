@@ -1,0 +1,307 @@
+body {
+	background: url(../../images/bg_tile.gif) top left repeat-x;
+	background-color:#fff;
+	padding:0;
+	margin:0;
+	width:100%;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	}
+img {
+	border:0;
+	}
+.welcomeTitle {
+	position:absolute;
+	top:0;
+	left:210px;
+	width:227px;
+	height:73px;
+	background:url(../../images/mla_welcome_title.gif);
+	background-color:#996633;
+}
+
+.welcomeTitleRebrand {
+	top:65px;
+	position:absolute;
+	left:210px;
+	width:227px;
+	height:73px;
+	vertical-align:middle;
+	background:url(../../images/mla_welcome_title.gif);
+	background-color:#996633;
+}
+
+#overlayBg {
+	position:absolute;
+	display:block;
+	top:26px;
+	left:50%;
+	margin-left:-330px;
+	width:657px;
+	height:392px;
+	z-index:1000;
+	background: url(../../images/overlayBg.png) no-repeat;
+	_background: 0;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/overlayBg.png');
+}
+#login, #newPassword {
+	position:absolute;
+	display:block;
+	top:76px;
+	left:50%;
+	width:572px;
+	height:310px;
+	margin-left:-286px;
+	z-index:1501;
+	background-color:rgb(255,255,255);
+}
+div.content {
+	position:absolute;
+	top:51px;
+	left:54px;
+	width:560px;
+	height:300px;
+	}
+#logoHmcts {
+	float:right;
+	height:40px;
+	width:135px;
+}
+#logoLaa {
+	position:absolute;
+	height:36px;
+	left:0px;
+	top:5px;
+	width:253px;
+}				
+div.logos {
+	position:absolute;
+	top:0;
+	left:0;
+	width:180px;
+	height:200px;
+	text-align:center;
+	}	
+
+div.logosReBrand{
+	height:100px;
+	left:0;
+	position:absolute;
+	width:560px;
+}	
+
+div.logos img {
+	display:block;
+	margin-bottom:30px;
+}
+div.welcomeTitle {
+	position:absolute;
+	top:0;
+	left:210px;
+	width:227px;
+	height:73px;
+	background:url(../../images/mla_welcome_title.gif) top left no-repeat;
+}
+.content div.hr {
+	position:absolute;
+	top:144px;
+	left:0;
+	width:543px;
+	height:1px;
+	line-height:1px;
+	font-size:1px;
+	color:#fff;
+	border-top:1px solid rgb(237,237,237);
+}
+.content div.loginForm{
+    position:absolute;
+    top:190px;
+    left:210px;
+    width:240px;
+    height:140px;
+    text-align:left;    
+}
+.content div.newPasswordForm {
+	position:absolute;
+	top:174px;
+	left:50px;
+	width:240px;
+	height:140px;
+	text-align:left;
+}
+.content div.loginErrorDetails {
+	position:absolute;
+	top:174px;
+	left:210px;
+	width:360px;
+	height:140px;
+	text-align:left;
+}
+
+.errorDetails {
+	position:absolute;
+	top:174px;
+	left:20px;
+	width:540px;
+	height:140px;
+	text-align:left;
+}
+
+.content div.loginForm label, .content div.newPasswordForm label {
+	font-weight:bold;
+	display:block;
+	width:240px;
+	}
+.content div.loginForm input , .content div.newPasswordForm input{
+	display:block;
+	margin-bottom:8px;
+	width:240px;
+	}
+	
+
+.submit {
+	float: right;
+	border: none;
+	background: url(../../images/button_login.gif);
+	background-repeat: no-repeat;
+	height: 21px;
+	width:70px;
+}
+
+.closeWindow {
+	float: right;
+	border: none;
+	background: url(../../images/btn_close_window.gif);
+	background-repeat: no-repeat;
+	height: 21px;
+	width:70px;
+}
+	
+.content div.newPasswordForm img.button {
+	margin-left:164px;
+	}
+.content div.versionNumber {
+    position:absolute;
+    top:240px;
+    left:15px;
+    color:#888;
+    font-weight:bold;
+    font-size:11px;
+    text-align:left;
+    width:200px;
+    height:48px;
+    overflow:hidden;
+}
+.content div.versionNumberTrain {
+    position:absolute;
+    top:240px;
+    left:15px;
+    color:#000;
+    font-weight:bold;
+    font-size:11px;
+    text-align:left;
+    width:200px;
+    height:48px;
+    overflow:hidden;
+    background-color:rgb(255,153,153);  
+}
+.content div.versionNumberDev {
+    position:absolute;
+    top:240px;
+    left:15px;
+    color:#000;
+    font-weight:bold;
+    font-size:11px;
+    text-align:left;
+    width:200px;
+    height:48px;
+    overflow:hidden;
+    background-color:rgb(153,255,204);  
+}
+.content div.versionNumberSys {
+    position:absolute;
+    top:240px;
+    left:15px;
+    color:#000;
+    font-weight:bold;
+    font-size:11px;
+    text-align:left;
+    width:200px;
+    height:48px;
+    overflow:hidden;
+    background-color:rgb(153,204,255);  
+}
+.content div.versionNumberUAT {
+    position:absolute;
+    top:240px;
+    left:15px;
+    color:#000;
+    font-weight:bold;
+    font-size:11px;
+    text-align:left;
+    width:200px;
+    height:48px;
+    overflow:hidden;
+    background-color:rgb(204,102,204);  
+}
+#logout {
+	position: absolute;
+	display: block;
+	top: 164px;
+	left: 210px;
+	color: rgb(255,0,0);
+	font-weight: bold;
+	text-align: left;
+	}
+
+#error {
+	position:absolute;
+	display: block;
+	top:145px;
+	left:110px;
+	color:rgb(255,0,0);
+	font-weight:bold;
+	text-align:left;
+	}
+#error.hide {
+	display:none;
+	}
+#error.show {
+	display:block;
+	}
+	
+#errorMsg {
+	position:absolute;
+	display: block;
+	top:171px;
+	left:300px;
+	color:#ffffff;
+	font-weight:bold;
+	text-align:left;
+	background-color: #870D0D;
+	padding:10px;
+}
+#errorMsg.hide {
+	display:none;
+	}
+#errorMsg.show {
+	display:block;
+	padding:10px;
+	}
+
+.button {
+	cursor:pointer;
+	}
+div #versionNumber {
+	position:absolute;
+	top:240px;
+	left:15px;
+	color:#888;
+	font-weight:bold;
+	font-size:11px;
+	text-align:left;
+	width:200px;
+	height:48px;
+	overflow:hidden;
+}
