@@ -34,9 +34,9 @@ def main_page(request):
 
     template = loader.get_template('service_status/service_status.html')
 
-    context = {'statuses': statuses, }
+    #context = {'statuses': statuses, }
 
-    # context = RequestContext(request, {'statuses': statuses, })
+    context = RequestContext(request, {'statuses': statuses, })
     #
 
     #
@@ -65,19 +65,6 @@ def ajax(request):
         else:
             statuses[service.name] = False
 
-    #response = json.dumps(statuses)
-
-    print('ajax')
-
     return JsonResponse(statuses)
 
 
-# def test_view(request):
-#
-#     print('test_view')
-#
-#     json_test = {}
-#     json_test['one'] = 'ONE'
-#     json_test['two'] = 'TWO'
-#
-#     return JsonResponse(json_test)

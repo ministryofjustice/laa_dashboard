@@ -4,41 +4,33 @@
 
 {% block head %}
 
-  <!--<script>-->
-
-    <!--var statusRequest = [-->
-
-        <!--{% for key, value in statuses.items %}-->
-
-        <!--"{{key}}",-->
-
-        <!--{% endfor %}-->
-
-    <!--]-->
-
-  <!--</script>-->
 <script src="{% static 'service_status/vendor/jquery-2.2.3.js' %}"></script>
 <script src="{% static 'service_status/main.js' %}"></script>
 
 {% endblock %}
 
 {% block content %}
+  <br>
 
-	<div id="service_table">
+
+  <table>
+
+    <thead>
+      <tr>
+        <th class="numeric" scope="col">Service</th>
+        <th class="numeric" scope="col">Status</th>
+      </tr>
+    </thead>
 
 		{% for key, value in statuses.items %}
 
-		<div class="service_table_row">
-			<div class="service_table_cell">{{key}}</div>
-			<div id="{{ key }}_status" class="service_table_cell">?</div>
-		</div>
+		<tr>
+			<td>{{key}}</td>
+			<td id="{{ key }}_status">?</td>
+		</tr>
 
 		{% endfor %}
 
-	</div>
-
-  <a id="test_link">TEST</a>
+	</table>
 
 {% endblock %}
-
-
