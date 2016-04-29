@@ -1,0 +1,44 @@
+{% extends 'service_status/common.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+  <!--<script>-->
+
+    <!--var statusRequest = [-->
+
+        <!--{% for key, value in statuses.items %}-->
+
+        <!--"{{key}}",-->
+
+        <!--{% endfor %}-->
+
+    <!--]-->
+
+  <!--</script>-->
+<script src="{% static 'service_status/vendor/jquery-2.2.3.js' %}"></script>
+<script src="{% static 'service_status/main.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+	<div id="service_table">
+
+		{% for key, value in statuses.items %}
+
+		<div class="service_table_row">
+			<div class="service_table_cell">{{key}}</div>
+			<div id="{{ key }}_status" class="service_table_cell">?</div>
+		</div>
+
+		{% endfor %}
+
+	</div>
+
+  <a id="test_link">TEST</a>
+
+{% endblock %}
+
+

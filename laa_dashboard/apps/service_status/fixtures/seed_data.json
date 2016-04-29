@@ -1,0 +1,112 @@
+[
+  {
+    "model": "service_status.service",
+    "pk": 1,
+    "fields": {
+      "name": "CCLF",
+      "url": "https://cclf.legalservices.gov.uk/cclf/AutoLogin",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 2,
+    "fields": {
+      "name": "CCMS",
+      "url": "https://ccmsebs.lab.gov",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 3,
+    "fields": {
+      "name": "CCR",
+      "url": "https://ccr.legalservices.gov.uk/ccr/AutoLogin",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 4,
+    "fields": {
+      "name": "CWA",
+      "url": "https://lsconlineapps.lab.gov/oa_servlets/AppsLogin",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 5,
+    "fields": {
+      "name": "Eforms",
+      "url": "https://eforms.legalservices.gov.uk/officeforms/ProcessDesktop_sso.ofml",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 6,
+    "fields": {
+      "name": "MAAT",
+      "url": "https://www.meansassessment.legalservices.gov.uk/",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 7,
+    "fields": {
+      "name": "MAAT/LIBRA",
+      "url": "https://www.meansassessment.legalservices.gov.uk/mla/",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 8,
+    "fields": {
+      "name": "MI",
+      "url": "https://lsconline.lab.gov/lscapps/eric-emi/AutoLoginServlet",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 9,
+    "fields": {
+      "name": "OBIEE",
+      "url": "https://obiee.lab.gov/analytics/",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 10,
+    "fields": {
+      "name": "PIMS",
+      "url": "https://lscprodtad.lab.gov/apex/f?p=200:LOGIN:675858114141001",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 11,
+    "fields": {
+      "name": "Portal",
+      "url": "https://lsconlinesso.legalservices.gov.uk/sso/pages/login.jsp",
+      "enabled": false
+    }
+  }
+  
+]

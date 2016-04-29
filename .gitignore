@@ -4,3 +4,4 @@ laa_dashboard/settings/local.py
 .DS_Store
 staticfiles/
 *.sqlite3
+other/
