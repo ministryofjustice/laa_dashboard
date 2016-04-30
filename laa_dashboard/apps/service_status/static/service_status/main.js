@@ -71,33 +71,23 @@ function update_status_elements(response) {
 
   $.each( statuses, function( key, value ) {
 
-      var element_id = key + "_status";
+      //var element_id = key + "_status";
 
       console.log( key + ": " + value );
 
-      console.log(element_id);
+      console.log(key);
 
-      document.getElementById(element_id).innerHTML = value.toString();
+      document.getElementById(key).innerHTML = value.toString();
 
   });
 
-  //// Consider ===
-  //for (var i = 0; i < statuses.length; i++) {
-  //
-  //  if (statusCode == 302) {
-  //    statusElement.innerHTML = "Up";
-  //  }
-  //  else {
-  //    statusElement.innerHTML = "Down";
-  //  }
-  //}
 
 }
 
 function get_statuses() {
   console.log("AJAX Status Request made")
   $.ajax({
-    url: "ajax/",
+    url: "check_all_services/",
     type: "GET",
 
     success: function (json) {
@@ -149,11 +139,47 @@ $.ajaxSetup({
   }
 });
 
+function check_service(request) {
+  console.log("AJAX Status Request made")
+  $.ajax({
+    url: "check_service/",
+    type: "GET",
+    data: request,
+
+    success: function (json) {
+      console.log(request.name);
+      console.log(json.status)
+      document.getElementById(request.name).innerHTML = json.status;
+
+    },
+
+    error: function (xhr, errmsg, err) {
+      console.log(xhr.status + ": " + xhr.responseText);
+      document.getElementById(request.name).innerHTML = "Error";
+    }
+
+  });
+}
+
+
+
+
 //Run on page load
 $(document).ready(function(){
 
   get_statuses();
   //$("#test_link").click(test_ajax);
+
+  //var statusCells = document.getElementsByClassName("status_cell");
+  //
+  //console.log(statusCells);
+  //
+  //for (var i = 0; i < statusCells.length; i++) {
+  //  var request = { name : statusCells[i].id };
+  //  console.log(request);
+  //  check_service(request);
+
+  //}
 
 
 });

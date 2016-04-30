@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from .models import Service
 import requests
+# from requests import async
+# from requests_futures.sessions import FuturesSession
 
 
 ok_status_codes = [302, 200]
@@ -53,9 +55,9 @@ def view_status(request):
     return HttpResponse(template.render(context))
 
 
-def ajax(request):
+def check_all_services(request):
 
-    print('ajax')
+    print('check_all_services')
     print(str(request))
 
     services = Service.objects.order_by('name')
@@ -97,31 +99,34 @@ def ajax(request):
 #     return JsonResponse(response)
 
 
-def check_service(request):
-
-    print('check_service')
-    print(str(request))
-
-    get = request.POST.get
-
-    service_name = get('name')
-
-    service = None
-
-    try:
-        service = Service.objects.get(name=service_name)
-    except MultipleObjectsReturned:
-        print('Multiple objects with name!')
-        response = {'error': 'Multiple services with same name'}
-    except ObjectDoesNotExist:
-        print('Object not found')
-        response = {'error': 'No service with given name'}
-
-    if service:
-        status_code = get_status_code(service.url)
-        response = {service.name: status_code}
-
-    return JsonResponse(response)
+# def check_service(request):
+#
+#     print('check_service')
+#     print(str(request))
+#
+#     get = request.GET.get
+#
+#     service_name = get('name')
+#
+#     # print('************' + service_name)
+#
+#     response = {}
+#
+#     try:
+#         service = Service.objects.get(name=service_name)
+#         print(service.url)
+#         # status_code = get_status_code(service.url)
+#         # response = {'status': status_code}
+#     except MultipleObjectsReturned:
+#         print('Multiple objects with name!')
+#         response = {'error': 'Multiple services with same name'}
+#     except ObjectDoesNotExist:
+#         print('Object not found')
+#         response = {'error': 'No service with given name'}
+#
+#     # print('*******************' + str(response))
+#
+#     return JsonResponse(response)
 
 
 
