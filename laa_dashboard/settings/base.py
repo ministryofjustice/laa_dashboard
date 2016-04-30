@@ -41,6 +41,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = '/accounts/login/'
+
+LOGIN_REDIRECT_URL = '/services/'
+
 LOCKDOWN_PASSWORDS = (os.environ.get('VIEWER_PASSWORD'))
 
 # X_FRAME_OPTIONS = 'DENY'

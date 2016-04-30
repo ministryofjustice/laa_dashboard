@@ -2,6 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
+from django.contrib.auth.decorators import login_required
 from .models import Service
 import requests
 
@@ -10,6 +11,7 @@ import requests
 ok_status_codes = [302, 200]
 
 
+@login_required
 def main_page(request):
 
     print('main_page')
