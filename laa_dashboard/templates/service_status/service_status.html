@@ -22,11 +22,11 @@
       </tr>
     </thead>
 
-		{% for key, value in statuses.items %}
+		{% for service in services %}
 
 		<tr>
-			<td>{{key}}</td>
-			<td id="{{ key }}_status">?</td>
+			<td>{{service.name}}</td>
+			<td id="{{service.name}}_status">?</td>
 		</tr>
 
 		{% endfor %}
