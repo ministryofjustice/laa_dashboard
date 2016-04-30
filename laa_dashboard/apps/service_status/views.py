@@ -12,9 +12,9 @@ ok_status_codes = [302, 200]
 
 
 @login_required
-def main_page(request):
+def view_status(request):
 
-    print('main_page')
+    print('view_status')
     print(str(request))
 
     services = Service.objects.order_by('name')
