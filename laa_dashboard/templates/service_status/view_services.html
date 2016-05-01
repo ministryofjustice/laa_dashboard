@@ -20,7 +20,7 @@
 		{% for service in services %}
 
 		<tr id="{{service.name}}" class="status_row">
-			<td class="name_cell">{{service.name}}</td>
+			<td class="name_cell"><a href="../edit_status/?name={{service.name}}">{{service.name}}</a></td>
 			<td class="auto_status_cell" >?</td>
       <td class="manual_status_cell" >{{service.manual_status}}</td>
       <td class="notes_cell" >{{service.notes}}</td>

@@ -39,16 +39,36 @@ def eval_code(status_code):
 
 
 @login_required
-def view_status(request):
+def view_services(request):
 
-    print('view_status')
+    print('view_services')
     print(str(request))
 
     services = Service.objects.order_by('name').values()
-    template = loader.get_template('service_status/service_status.html')
+    template = loader.get_template('service_status/view_services.html')
     context = RequestContext(request, {'services': services})
 
     return HttpResponse(template.render(context))
+
+
+def view_status(request):
+
+    service_name = request.GET.get('name')
+    service = Service.objects.get(name=service_name)
+    print(service_name)
+
+    try:
+        service = Service.objects.get(name=service_name)
+    except MultipleObjectsReturned:
+        print('Multiple objects with name!')
+    except ObjectDoesNotExist:
+        print('Object not found')
+
+    template = loader.get_template('service_status/edit_status.html')
+    context = RequestContext(request, {'service': service})
+
+    return HttpResponse(template.render(context))
+
 
 
 def update_status(request):
@@ -65,7 +85,14 @@ def update_status(request):
 def edit_status(request):
 
     service_name = request.GET.get('name')
-    service = Service.objects.get(name=service_name)
+
+    try:
+        service = Service.objects.get(name=service_name)
+    except MultipleObjectsReturned:
+        print('Multiple objects with name!')
+    except ObjectDoesNotExist:
+        print('Object not found')
+
     print(service_name)
 
     if request.method == 'POST':
@@ -75,13 +102,7 @@ def edit_status(request):
             return HttpResponseRedirect('../update_status/')
 
     else:
-        try:
-            service = Service.objects.get(name=service_name)
-            form = ServiceForm(instance=service)
-        except MultipleObjectsReturned:
-            print('Multiple objects with name!')
-        except ObjectDoesNotExist:
-            print('Object not found')
+        form = ServiceForm(instance=service)
 
     template = loader.get_template('service_status/edit_status.html')
     context = RequestContext(request, {'form': form, 'service': service})
