@@ -7,9 +7,11 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from .models import Service
 import requests
 from requests_futures.sessions import FuturesSession
-from .forms import ServiceForm
+from .forms import ServiceForm, ServiceFormSet
 
-from django.forms import formset_factory
+from django.forms import formset_factory, modelform_factory, BaseFormSet
+
+# from django.forms import modelformset_factory
 
 
 
@@ -58,27 +60,116 @@ def view_status(request):
     return HttpResponse(template.render(context))
 
 
+# def service_formset_factory(service, form=ServiceForm, formfield_callback=None,
+#                          formset=BaseFormSet,
+#                          extra=1, can_delete=False, can_order=False,
+#                          max_num=None, fields=None, exclude=None):
+#     """
+#     Returns a FormSet class for the given Django model class.
+#     """
+#     form = modelform_factory(service, form=form, fields=fields, exclude=exclude,
+#                              formfield_callback=formfield_callback)
+#     FormSet = formset_factory(form, formset, extra=extra, max_num=max_num,
+#                               can_order=can_order, can_delete=can_delete)
+#
+#     FormSet.model = service
+#     return FormSet
+
+# def modelformset_factory(model, form=ModelForm, formfield_callback=None,
+#                          formset=BaseModelFormSet,
+#                          extra=1, can_delete=False, can_order=False,
+#                          max_num=None, fields=None, exclude=None):
+#     """
+#     Returns a FormSet class for the given Django model class.
+#     """
+#     form = modelform_factory(model, form=form, fields=fields, exclude=exclude,
+#                              formfield_callback=formfield_callback)
+#     FormSet = formset_factory(form, formset, extra=extra, max_num=max_num,
+#                               can_order=can_order, can_delete=can_delete)
+#     FormSet.model = model
+#     return FormSet
+
+
 def update_status(request):
 
-    services = Service.objects.order_by('name')
-
-    sets = []
-
-    for service in services:
-
-        form = ServiceForm(instance=service)
-
-        form_set = { 'name': service.name, 'form': form }
-
-        sets.append(form_set)
-
-    print('update_status')
+    services = Service.objects.order_by('name').values()
 
     template = loader.get_template('service_status/update_status.html')
 
-    context = RequestContext(request, {'sets': sets})
+    context = RequestContext(request, {'services': services})
 
     return HttpResponse(template.render(context))
+
+
+def edit_status(request):
+
+    service_name = request.GET.get('name')
+    print(service_name)
+
+    try:
+        service = Service.objects.get(name=service_name)
+        form = ServiceForm(instance=service)
+    except MultipleObjectsReturned:
+        print('Multiple objects with name!')
+    except ObjectDoesNotExist:
+        print('Object not found')
+
+    template = loader.get_template('service_status/edit_status.html')
+
+    context = RequestContext(request, {'form': form})
+
+    return HttpResponse(template.render(context))
+
+# def update_status(request):
+#
+#     # ServiceFormSet = formset_factory(ServiceForm)
+#
+#     # labels = {
+#     #     ''
+#     # }
+#
+#     # ServiceFormSet = modelformset_factory(Service, fields=('manual_status', 'notes'),)
+#
+#     service_form_set = formset_factory(ServiceForm, formset=ServiceFormSet)
+#     print('update_status_new')
+#
+#     if request.method == 'POST':
+#         form_set = service_form_set(request.POST)
+#         if form_set.is_valid():
+#             form_set.save()
+#     else:
+#         form_set = service_form_set()
+#
+#     template = loader.get_template('service_status/update_status.html')
+#
+#     context = RequestContext(request, {'formset': form_set})
+#
+#     return HttpResponse(template.render(context))
+
+
+    # return render(request, 'service_status/update_status.html', {'formset': form_set})
+
+# def update_status(request):
+#
+#     services = Service.objects.order_by('name')
+#
+#     sets = []
+#
+#     for service in services:
+#
+#         form = ServiceForm(instance=service)
+#
+#         form_set = { 'name': service.name, 'form': form }
+#
+#         sets.append(form_set)
+#
+#     print('update_status')
+#
+#     template = loader.get_template('service_status/update_status.html')
+#
+#     context = RequestContext(request, {'sets': sets})
+#
+#     return HttpResponse(template.render(context))
 
 
 def check_all_services(request):

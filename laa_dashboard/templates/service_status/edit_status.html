@@ -1,0 +1,25 @@
+{% extends 'service_status/common.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<form action="#" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}
+
+{% block body_end %}
+<script src="{% static 'service_status/main.js' %}"></script>
+
+
+{% endblock %}
