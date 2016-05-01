@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
@@ -104,15 +104,29 @@ def update_status(request):
 def edit_status(request):
 
     service_name = request.GET.get('name')
+    service = Service.objects.get(name=service_name)
     print(service_name)
 
-    try:
-        service = Service.objects.get(name=service_name)
-        form = ServiceForm(instance=service)
-    except MultipleObjectsReturned:
-        print('Multiple objects with name!')
-    except ObjectDoesNotExist:
-        print('Object not found')
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ServiceForm(request.POST, instance=service)
+        # check whether it's valid:
+        if form.is_valid():
+
+            form.save()
+
+            return HttpResponseRedirect('../update_status/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        try:
+            service = Service.objects.get(name=service_name)
+            form = ServiceForm(instance=service)
+        except MultipleObjectsReturned:
+            print('Multiple objects with name!')
+        except ObjectDoesNotExist:
+            print('Object not found')
+
 
     template = loader.get_template('service_status/edit_status.html')
 
