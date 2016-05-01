@@ -46,10 +46,17 @@ div.inner-block {
 
 }
 
+/*.name_cell {*/
+
+    /*font-weight: bold;*/
+/*}*/
+
+
 .large_name_cell {
 
-    width: 200px;
-    text-align: center;
+    width: 100px;
+    text-align: left;
+    font-weight: bold;
 
 
 }
@@ -70,4 +77,10 @@ div.inner-block {
     min-height: 150px;
     border: 1px solid black;
     padding: 5px;
+}
+
+caption {
+    text-align: left;
+    font-weight: bold;
+    font-size: larger;
 }
