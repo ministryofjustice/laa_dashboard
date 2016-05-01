@@ -5,7 +5,7 @@
 {% block content %}
 
 
-  <table id="edit_table">
+  <table id="view_table">
 
     <thead>
           
@@ -26,8 +26,8 @@
     <tr id="{{service.name}}" class="status_row">
       <td class="large_name_cell">{{ service.name }}</td>
       <td class="large_status_cell" >?</td>
-      <td class="large_status_cell">{{form.manual_status}}</td>
-      <td class="">{{form.notes}}</td>
+      <td class="large_status_cell">{{service.manual_status}}</td>
+      <td class="notes_view_cell">{{service.notes}}</td>
 
     </tr>
 

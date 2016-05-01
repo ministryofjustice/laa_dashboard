@@ -54,8 +54,6 @@ def view_services(request):
 def view_status(request):
 
     service_name = request.GET.get('name')
-    service = Service.objects.get(name=service_name)
-    print(service_name)
 
     try:
         service = Service.objects.get(name=service_name)
@@ -64,11 +62,12 @@ def view_status(request):
     except ObjectDoesNotExist:
         print('Object not found')
 
-    template = loader.get_template('service_status/edit_status.html')
+    print(service_name)
+
+    template = loader.get_template('service_status/view_status.html')
     context = RequestContext(request, {'service': service})
 
     return HttpResponse(template.render(context))
-
 
 
 def update_status(request):
