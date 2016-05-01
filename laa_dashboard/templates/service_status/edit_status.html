@@ -6,11 +6,39 @@
 
 
 <form action="#" method="post">
-    {% csrf_token %}
-    {{ form.as_table }}
-    <input type="submit" value="Submit" />
-</form>
+  {% csrf_token %}
 
+<table id="edit_table">
+
+  <thead>
+        
+  <tr>
+          
+    <th class="numeric" scope="col">Service</th>
+    <th class="numeric" scope="col">Auto Check</th>
+     
+    <th class="numeric" scope="col">Status</th>
+    <th class="numeric" scope="col">Notes</th>
+          
+  </tr>
+      
+  </thead>
+
+
+
+  <tr id="{{service.name}}" class="status_row">
+    <td class="large_name_cell">{{ service.name }}</td>
+    <td class="large_status_cell" >?</td>
+    <td class="large_status_cell">{{form.manual_status}}</td>
+    <td class="">{{form.notes}}</td>
+    <td class=""><input type="submit" value="Submit"/></td>
+  </tr>
+
+
+</table>
+
+
+</form>
 
 {% endblock %}
 

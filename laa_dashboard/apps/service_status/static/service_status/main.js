@@ -62,7 +62,7 @@ function update_status_elements(response) {
 
       row =document.getElementById(key); // .innerHTML = value.toString();
 
-      row.getElementsByClassName("status_cell")[0].innerHTML = value.toString();
+      row.getElementsByClassName("auto_status_cell")[0].innerHTML = value.toString();
 
   });
 

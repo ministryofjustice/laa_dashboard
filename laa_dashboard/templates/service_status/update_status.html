@@ -4,29 +4,33 @@
 
 {% block content %}
 
- <table id="service_select_table">
+<table id="service_select_table">
 
-    <thead>
-      <tr>
-        <th class="numeric" scope="col">Service</th>
-        <th class="numeric" scope="col">Manual Status</th>
-        <th class="numeric" scope="col">Auto Status</th>
-        <th class="numeric" scope="col">Note</th>
-      </tr>
-    </thead>
+  <thead>
+        
+  <tr>
+            
+    <th class="numeric" scope="col">Service</th>
+    <th class="numeric" scope="col">Auto Check</th>
+    <th class="numeric" scope="col">Status</th>
+    <th class="numeric" scope="col">Notes</th>
+          
+  </tr>
+      
+  </thead>
 
-		{% for service in services %}
+  {% for service in services %}
 
-		<tr class="select_row">
-			<td class="name_cell"><a href="../edit_status/?name={{service.name}}">{{service.name}}</a></td>
-			<td class="manual_status_cell" >?</td>
-      <td class="auto_status_cell" >?</td>
-      <td class="note_cell" >{{service.notes}}</td>
-		</tr>
+  <tr class="select_row">
+    <td class="name_cell"><a href="../edit_status/?name={{service.name}}">{{service.name}}</a></td>
+    <td class="auto_status_cell" >?</td>
+    <td class="manual_status_cell" >{{service.manual_status}}</td>
+    <td class="notes_cell" >{{service.notes}}</td>
+  </tr>
 
-		{% endfor %}
+  {% endfor %}
 
-	</table>
+</table>
 
 
 {% endblock %}

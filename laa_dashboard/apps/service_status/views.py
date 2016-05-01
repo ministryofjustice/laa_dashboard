@@ -84,7 +84,7 @@ def edit_status(request):
             print('Object not found')
 
     template = loader.get_template('service_status/edit_status.html')
-    context = RequestContext(request, {'form': form})
+    context = RequestContext(request, {'form': form, 'service': service})
 
     return HttpResponse(template.render(context))
 
