@@ -6,8 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from .models import Service
 import requests
-# from requests import async
-# from requests_futures.sessions import FuturesSession
+from requests_futures.sessions import FuturesSession
+from .forms import ServiceForm
+
+from django.forms import formset_factory
+
 
 
 ok_status_codes = [302, 200]
@@ -55,6 +58,29 @@ def view_status(request):
     return HttpResponse(template.render(context))
 
 
+def update_status(request):
+
+    services = Service.objects.order_by('name')
+
+    sets = []
+
+    for service in services:
+
+        form = ServiceForm(instance=service)
+
+        form_set = { 'name': service.name, 'form': form }
+
+        sets.append(form_set)
+
+    print('update_status')
+
+    template = loader.get_template('service_status/update_status.html')
+
+    context = RequestContext(request, {'sets': sets})
+
+    return HttpResponse(template.render(context))
+
+
 def check_all_services(request):
 
     print('check_all_services')
@@ -69,10 +95,10 @@ def check_all_services(request):
         try:
             print('Getting ' + service.url)
             r = requests.get(service.url, verify=False, timeout=5)
-        except:
-            print(service.url)
+        except Exception as e:
+            print('**********Requests Error *******************:  ', e)
 
-        if r.status_code in ok_status_codes:
+        if r.status_code and r.status_code in ok_status_codes:
             statuses[service.name] = True
         else:
             statuses[service.name] = False
@@ -106,6 +132,8 @@ def check_all_services(request):
 #
 #     get = request.GET.get
 #
+#     session = FuturesSession()
+#
 #     service_name = get('name')
 #
 #     # print('************' + service_name)
@@ -115,6 +143,7 @@ def check_all_services(request):
 #     try:
 #         service = Service.objects.get(name=service_name)
 #         print(service.url)
+#         server_response = session.get(service.url)
 #         # status_code = get_status_code(service.url)
 #         # response = {'status': status_code}
 #     except MultipleObjectsReturned:
@@ -127,6 +156,35 @@ def check_all_services(request):
 #     # print('*******************' + str(response))
 #
 #     return JsonResponse(response)
+
+def check_service(request):
+
+    print('check_service')
+    print(str(request))
+
+    get = request.GET.get
+
+    service_name = get('name')
+
+    # print('************' + service_name)
+
+    response = {}
+
+    try:
+        service = Service.objects.get(name=service_name)
+        print(service.url)
+        status_code = get_status_code(service.url)
+        response = {'status': status_code}
+    except MultipleObjectsReturned:
+        print('Multiple objects with name!')
+        response = {'error': 'Multiple services with same name'}
+    except ObjectDoesNotExist:
+        print('Object not found')
+        response = {'error': 'No service with given name'}
+
+    # print('*******************' + str(response))
+
+    return JsonResponse(response)
 
 
 

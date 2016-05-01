@@ -1,0 +1,31 @@
+{% extends 'service_status/common.html' %}
+
+{% load staticfiles %}
+
+{% block head %}
+
+<script src="{% static 'service_status/vendor/jquery-2.2.3.js' %}"></script>
+<script src="{% static 'service_status/main.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+<table>
+{% for set in sets %}
+
+		<tr>
+			<td>{{set.name}}</td>
+			  <td>
+
+          {% csrf_token %}
+
+          {{ set.form }}
+
+        </td>
+		</tr>
+
+{% endfor %}
+</table>
+
+
+{% endblock %}

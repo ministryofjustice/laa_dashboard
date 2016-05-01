@@ -64,6 +64,7 @@ function ajax_request_json(js_object) {
 
 function update_status_elements(response) {
 
+  console.log('***********update_status_elements called*******************')
   console.log(response);
 
   var statuses = response;
@@ -138,28 +139,28 @@ $.ajaxSetup({
     }
   }
 });
-
-function check_service(request) {
-  console.log("AJAX Status Request made")
-  $.ajax({
-    url: "check_service/",
-    type: "GET",
-    data: request,
-
-    success: function (json) {
-      console.log(request.name);
-      console.log(json.status)
-      document.getElementById(request.name).innerHTML = json.status;
-
-    },
-
-    error: function (xhr, errmsg, err) {
-      console.log(xhr.status + ": " + xhr.responseText);
-      document.getElementById(request.name).innerHTML = "Error";
-    }
-
-  });
-}
+//
+//function check_service(request) {
+//  console.log("AJAX Status Request made");
+//  $.ajax({
+//    url: "check_service/",
+//    type: "GET",
+//    data: request,
+//
+//    success: function (json) {
+//      console.log(request.name);
+//      console.log(json.status);
+//      document.getElementById(request.name).innerHTML = json.status;
+//
+//    },
+//
+//    error: function (xhr, errmsg, err) {
+//      console.log(xhr.status + ": " + xhr.responseText);
+//      document.getElementById(request.name).innerHTML = "Error";
+//    }
+//
+//  });
+//}
 
 
 
@@ -180,6 +181,9 @@ $(document).ready(function(){
   //  check_service(request);
 
   //}
-
+  //
+  //var testRequest = { name : "CCMS" };
+  //
+  //check_service(testRequest);
 
 });
