@@ -42,26 +42,6 @@ function sameOrigin(url) {
 }
 
 
-function ajax_request_json(js_object) {
-  console.log("AJAX Request made")
-  $.ajax({
-    url: "ajax/",
-    type: "POST",
-    data: js_object,
-
-    // handle a successful response
-    success: function (json) {
-      console.log(json);
-    },
-
-    // handle a non-successful response
-    error: function (xhr, errmsg, err) {
-      console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
-
-  });
-}
-
 function update_status_elements(response) {
 
   console.log('***********update_status_elements called*******************')
@@ -105,24 +85,6 @@ function get_statuses() {
 }
 
 
-//function test_ajax() {
-//  console.log("Test AJAX Status Request made")
-//  $.ajax({
-//    url: "test_view/",
-//    type: "GET",
-//
-//    success: function (json) {
-//      console.log(json);
-//
-//    },
-//
-//    error: function (xhr, errmsg, err) {
-//      console.log(xhr.status + ": " + xhr.responseText);
-//    }
-//
-//  });
-//}
-
 //Run on script import
 
 console.log("main.js imported");
@@ -139,51 +101,13 @@ $.ajaxSetup({
     }
   }
 });
-//
-//function check_service(request) {
-//  console.log("AJAX Status Request made");
-//  $.ajax({
-//    url: "check_service/",
-//    type: "GET",
-//    data: request,
-//
-//    success: function (json) {
-//      console.log(request.name);
-//      console.log(json.status);
-//      document.getElementById(request.name).innerHTML = json.status;
-//
-//    },
-//
-//    error: function (xhr, errmsg, err) {
-//      console.log(xhr.status + ": " + xhr.responseText);
-//      document.getElementById(request.name).innerHTML = "Error";
-//    }
-//
-//  });
-//}
-
 
 
 
 //Run on page load
 $(document).ready(function(){
 
-  //get_statuses();
-  //$("#test_link").click(test_ajax);
 
-  //var statusCells = document.getElementsByClassName("status_cell");
-  //
-  //console.log(statusCells);
-  //
-  //for (var i = 0; i < statusCells.length; i++) {
-  //  var request = { name : statusCells[i].id };
-  //  console.log(request);
-  //  check_service(request);
 
-  //}
-  //
-  //var testRequest = { name : "CCMS" };
-  //
-  //check_service(testRequest);
 
 });
