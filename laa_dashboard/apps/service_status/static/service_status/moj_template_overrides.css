@@ -29,34 +29,26 @@ div.inner-block {
 #status_table {
     margin-left: auto;
     margin-right: auto;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border: 1px solid black;
 
 }
 
 .status_row {
 
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border: 1px solid black;
 }
 
 
 .name_cell {
 
     width: 200px;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px 1px 1px 1px;
+    border: 1px solid black;
 
 }
 
 .status_cell {
 
     width: 200px;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px 1px 1px 1px;
+    border: 1px solid black;
 
 }

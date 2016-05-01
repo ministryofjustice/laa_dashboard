@@ -52,13 +52,17 @@ function update_status_elements(response) {
 
   $.each( statuses, function( key, value ) {
 
+      var row;
+
       //var element_id = key + "_status";
 
       console.log( key + ": " + value );
 
       console.log(key);
 
-      document.getElementById(key).innerHTML = value.toString();
+      row =document.getElementById(key); // .innerHTML = value.toString();
+
+      row.getElementsByClassName("status_cell")[0].innerHTML = value.toString();
 
   });
 

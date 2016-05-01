@@ -17,9 +17,9 @@
 
 		{% for service in services %}
 
-		<tr class="status_row">
+		<tr id="{{service.name}}" class="status_row">
 			<td class="name_cell">{{service.name}}</td>
-			<td id="{{service.name}}" class="status_cell" >?</td>
+			<td class="status_cell" >?</td>
 		</tr>
 
 		{% endfor %}
