@@ -42,6 +42,16 @@ div.inner-block {
     border-width: 1px;
 }
 
+
+.name_cell {
+
+    width: 200px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 1px 1px 1px;
+
+}
+
 .status_cell {
 
     width: 200px;

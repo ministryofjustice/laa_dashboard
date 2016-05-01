@@ -168,7 +168,7 @@ $.ajaxSetup({
 //Run on page load
 $(document).ready(function(){
 
-  get_statuses();
+  //get_statuses();
   //$("#test_link").click(test_ajax);
 
   //var statusCells = document.getElementsByClassName("status_cell");

@@ -4,8 +4,8 @@
 
 {% block head %}
 
-<script src="{% static 'service_status/vendor/jquery-2.2.3.js' %}"></script>
-<script src="{% static 'service_status/main.js' %}"></script>
+<!--<script src="{% static 'service_status/vendor/jquery-2.2.3.js' %}"></script>-->
+<!--<script src="{% static 'service_status/main.js' %}"></script>-->
 
 {% endblock %}
 
@@ -25,7 +25,7 @@
 		{% for service in services %}
 
 		<tr class="status_row">
-			<td>{{service.name}}</td>
+			<td class="name_cell">{{service.name}}</td>
 			<td id="{{service.name}}" class="status_cell" >?</td>
 		</tr>
 
@@ -33,4 +33,10 @@
 
 	</table>
 
+{% endblock %}
+
+{% block body_end %}
+<script src="{% static 'service_status/main.js' %}"></script>
+
+<script>get_statuses()</script>
 {% endblock %}
