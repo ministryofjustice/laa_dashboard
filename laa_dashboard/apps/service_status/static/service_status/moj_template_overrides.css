@@ -1,3 +1,5 @@
+
+
 #global-header-bar {
 
     max-width: none;
@@ -31,6 +33,22 @@ div.inner-block {
     margin-right: auto;
     /*border: 1px solid black;*/
 
+
+}
+
+#password_column {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#login_table {
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
 }
 
 .status_row {
@@ -45,6 +63,12 @@ div.inner-block {
     border: 1px solid black;
 
 }
+
+/*.password_cell {*/
+    /*width: 100px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+/*}*/
 
 /*.name_cell {*/
 
@@ -84,3 +108,32 @@ caption {
     font-weight: bold;
     font-size: larger;
 }
+
+#login_caption {
+    font-size: large;
+}
+
+.form_button {
+    background-color: white;
+    border: 2px solid #005ea5;
+    color: black;
+    /*padding: 10% 10%;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /*font-size: 16px;*/
+    font-size: inherit;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.form_button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+/*#login_button {*/
+    /*fon*/
+/*}*/

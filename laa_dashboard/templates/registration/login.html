@@ -2,36 +2,27 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+<div id="password_column">
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
+  <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    {% csrf_token %}
+    <table id="#login_table">
+      <caption id="login_caption">Enter Password</caption>
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+      <tr class="status_row">
+        <td class="password_cell">{{ form.username.label_tag }}</td>
+        <td class="password_cell">{{ form.username }}</td>
+      </tr>
+      <tr class="status_row">
+        <td class="password_cell">{{ form.password.label_tag }}</td>
+        <td class="password_cell">{{ form.password }}</td>
+      </tr>
+    </table>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+    <input class="form_button" type="submit" value="login"/>
+    <input type="hidden" name="next" value="{{ next }}"/>
+  </form>
 
-
+</div>
 
 {% endblock %}
