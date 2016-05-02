@@ -21,8 +21,8 @@
 
 		<tr id="{{service.name}}" class="status_row">
 			<td class="name_cell"><a href="view_status/?name={{service.name}}">{{service.name}}</a></td>
-			<td class="auto_status_cell" >?</td>
-      <td class="manual_status_cell" >{{service.manual_status}}</td>
+			<td class="auto_status_cell" ></td>
+      <td class="manual_status_cell {{service.manual_status|lower}}"></td>
       <td class="notes_cell" >{{service.notes}}</td>
 		</tr>
 
@@ -33,7 +33,8 @@
 {% endblock %}
 
 {% block body_end %}
+<script src="{% static 'service_status/ajax_csrf.js' %}"></script>
 <script src="{% static 'service_status/main.js' %}"></script>
 
-<script>get_statuses()</script>
+<script>set_cell_colours(); get_statuses();</script>
 {% endblock %}

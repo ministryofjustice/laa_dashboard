@@ -2,45 +2,8 @@
  * Created by jamesnarey on 29/04/2016.
  */
 
-
-// This function gets cookie with a given name
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie != '') {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = jQuery.trim(cookies[i]);
-      // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) == (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
-
-//The functions below will create a header with csrftoken
-
-function csrfSafeMethod(method) {
-  // these HTTP methods do not require CSRF protection
-  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
-function sameOrigin(url) {
-  // test that a given url is a same-origin URL
-  // url could be relative or scheme relative or absolute
-  var host = document.location.host; // host + port
-  var protocol = document.location.protocol;
-  var sr_origin = '//' + host;
-  var origin = protocol + sr_origin;
-  // Allow absolute or scheme relative URLs to same origin
-  return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-    (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-      // or any other URL that isn't scheme relative or absolute i.e relative.
-    !(/^(\/\/|http:|https:).*/.test(url));
-}
-
+var ok_hex_colour = '#009900';
+var not_ok_hex_colour = '#e60000';
 
 function update_status_elements(response) {
 
@@ -53,6 +16,7 @@ function update_status_elements(response) {
   $.each( statuses, function( key, value ) {
 
       var row;
+      var auto_cell;
 
       //var element_id = key + "_status";
 
@@ -62,12 +26,40 @@ function update_status_elements(response) {
 
       row =document.getElementById(key); // .innerHTML = value.toString();
 
-      row.getElementsByClassName("auto_status_cell")[0].innerHTML = value.toString();
+      auto_cell = row.getElementsByClassName("auto_status_cell")[0];
+      //auto_cell.innerHTML = value.toString();
+      auto_cell.classList.add(value.toString());
 
   });
 
 
 }
+
+
+
+function set_cell_colours() {
+
+  console.log('***********update_cell_colours called*******************')
+
+  var trueCells = document.getElementsByClassName("true");
+
+  for (var i = 0; i < trueCells.length; i++) {
+
+    trueCells[i].style.backgroundColor=ok_hex_colour;
+  }
+
+  var falseCells = document.getElementsByClassName("false");
+
+  for (var i = 0; i < falseCells.length; i++) {
+
+    falseCells[i].style.backgroundColor=not_ok_hex_colour;
+  }
+
+
+}
+
+
+
 
 function get_statuses() {
   console.log("AJAX Status Request made")
@@ -78,6 +70,7 @@ function get_statuses() {
     success: function (json) {
       //console.log(json);
       update_status_elements(json);
+      set_cell_colours();
 
     },
 
@@ -89,24 +82,11 @@ function get_statuses() {
 }
 
 
+
+
 //Run on script import
 
 console.log("main.js imported");
-
-var csrftoken = getCookie('csrftoken');
-
-$.ajaxSetup({
-  beforeSend: function (xhr, settings) {
-    if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-      // Send the token to same-origin, relative URLs only.
-      // Send the token only if the method warrants CSRF protection
-      // Using the CSRFToken value acquired earlier
-      xhr.setRequestHeader("X-CSRFToken", csrftoken);
-    }
-  }
-});
-
-
 
 //Run on page load
 $(document).ready(function(){

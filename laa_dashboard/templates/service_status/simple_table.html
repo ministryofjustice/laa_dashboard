@@ -1,0 +1,48 @@
+<html>
+
+<head><title></title>
+
+  <link href="{% static 'stylesheets/govuk-template.css' %}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{% static 'stylesheets/fonts.css' %}" media="all" rel="stylesheet" type="text/css" />
+  <link href="{% static 'service_status/main.css' %}" rel="stylesheet" type="text/css"/>
+
+<style>
+
+
+</style>
+
+
+</head>
+
+<body>
+
+<table id="status_table" style="width: {{table.width}}, height: {{table.height}}">
+  <caption>View Services</caption>
+
+  <thead>
+        
+  <tr>
+          
+    <th class="numeric" scope="col">Service Status</th>
+          
+  </tr>
+      
+  </thead>
+
+  {% for service in services %}
+
+  <tr id="{{service.name}}" class="status_row">
+    <td class="status_cell {{service.manual_status|lower}}">{{service.name}}</td>
+  </tr>
+
+  {% endfor %}
+
+</table>
+
+
+<script>set_cell_colours()</script>
+
+</body>
+
+
+</html>

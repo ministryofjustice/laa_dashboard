@@ -11,6 +11,9 @@ from .forms import ServiceForm, ServiceFormSet
 
 ok_status_codes = [302, 200]
 
+# ok_hex_colour = '#009900'
+# not_ok_hex_colour = '#e60000'
+
 
 def get_status_code(url, verify=False):
     # try:
@@ -47,6 +50,28 @@ def view_services(request):
     services = Service.objects.order_by('name').values()
     template = loader.get_template('service_status/view_services.html')
     context = RequestContext(request, {'services': services})
+
+    return HttpResponse(template.render(context))
+
+
+def simple_table(request):
+
+    print('simple_table')
+    print(str(request))
+
+    width = request.GET.get('width', default=300)
+    height = request.GET.get('height', default=800)
+    # use_auto = request.GET.get('use_auto', default=False)
+
+    services = Service.objects.order_by('name').values()
+
+    table = {
+        'width': width,
+        'height': height,
+    }
+
+    template = loader.get_template('service_status/simple_table.html')
+    context = RequestContext(request, {'services': services, 'table': table})
 
     return HttpResponse(template.render(context))
 

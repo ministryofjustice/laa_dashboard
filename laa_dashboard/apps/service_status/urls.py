@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^edit_status/', views.edit_status),
     url(r'^view_status/', views.view_status),
     url(r'^update_status/', views.update_status),
+    url(r'^simple_table/', views.simple_table),
     url(r'^', views.view_services),
 
 ]
