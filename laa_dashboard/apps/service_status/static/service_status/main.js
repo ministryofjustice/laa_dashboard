@@ -64,7 +64,7 @@ function set_cell_colours() {
 function get_statuses() {
   console.log("AJAX Status Request made")
   $.ajax({
-    url: "check_all_services/",
+    url: "/services/check_all_services/",
     type: "GET",
 
     success: function (json) {

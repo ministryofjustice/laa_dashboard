@@ -58,7 +58,7 @@
 
 }
 
-.large_status_cell {
+.large_auto_status_cell, .large_manual_status_cell {
 
     width: 100px;
     text-align: center;

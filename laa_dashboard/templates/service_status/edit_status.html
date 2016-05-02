@@ -30,8 +30,8 @@
 
   <tr id="{{service.name}}" class="status_row">
     <td class="large_name_cell">{{ service.name }}</td>
-    <td class="large_status_cell" >?</td>
-    <td class="large_status_cell">{{form.manual_status}}</td>
+    <td class="large_auto_status_cell" ></td>
+    <td class="large_manual_status_cell {{service.manual_status|lower}}">{{form.manual_status}}</td>
     <td class="">{{form.notes}}</td>
     <td class=""><input class="form_button" type="submit" value="Submit"/></td>
   </tr>
@@ -47,6 +47,7 @@
 {% block body_end %}
 <script src="{% static 'service_status/ajax_csrf.js' %}"></script>
 <script src="{% static 'service_status/main.js' %}"></script>
+<script>set_cell_colours();</script>
 
 
 {% endblock %}
