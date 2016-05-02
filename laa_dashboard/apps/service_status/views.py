@@ -9,7 +9,7 @@ from .models import Service
 from .forms import ServiceForm, ServiceFormSet
 
 
-ok_status_codes = [302, 200]
+# ok_status_codes = [302, 200]
 
 # ok_hex_colour = '#009900'
 # not_ok_hex_colour = '#e60000'
@@ -143,13 +143,7 @@ def check_all_services(request):
 
     for service in services:
 
-        try:
-            print('Getting ' + service.url)
-            r = requests.get(service.url, verify=False, timeout=5)
-        except Exception as e:
-            print('**********Requests Error *******************:  ', e)
-
-        if r.status_code and r.status_code in ok_status_codes:
+        if service.auto_status:
             statuses[service.name] = True
         else:
             statuses[service.name] = False

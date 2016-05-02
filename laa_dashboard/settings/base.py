@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import sys
+from datetime import timedelta
 from os.path import join, abspath, dirname
 import dj_database_url
 
@@ -56,6 +57,20 @@ LOCKDOWN_PASSWORDS = (os.environ.get('VIEWER_PASSWORD'))
 
 # Application definition
 
+BROKER_URL = 'django://'
+
+CELERYBEAT_SCHEDULE = {
+    'auto_check': {
+        'task': 'tasks.auto_check',
+        'schedule': timedelta(minutes=1),
+        # 'args': (16, 16)
+    },
+}
+
+CELERY_TIMEZONE = 'UTC'
+
+CELERY_REDIRECT_STDOUTS = False
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,6 +78,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'kombu.transport.django',
     'moj_template',
     'service_status',
 ]
