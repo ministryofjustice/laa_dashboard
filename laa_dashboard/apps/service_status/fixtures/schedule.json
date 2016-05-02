@@ -1,0 +1,79 @@
+[
+{
+  "model": "djcelery.intervalschedule",
+  "pk": 1,
+  "fields": {
+    "every": 10,
+    "period": "seconds"
+  }
+},
+{
+  "model": "djcelery.intervalschedule",
+  "pk": 2,
+  "fields": {
+    "every": 5,
+    "period": "minutes"
+  }
+},
+{
+  "model": "djcelery.crontabschedule",
+  "pk": 1,
+  "fields": {
+    "minute": "0",
+    "hour": "4",
+    "day_of_week": "*",
+    "day_of_month": "*",
+    "month_of_year": "*"
+  }
+},
+{
+  "model": "djcelery.periodictasks",
+  "pk": 1,
+  "fields": {
+    "last_update": "2016-05-02T20:04:03.770Z"
+  }
+},
+{
+  "model": "djcelery.periodictask",
+  "pk": 1,
+  "fields": {
+    "name": "celery.backend_cleanup",
+    "task": "celery.backend_cleanup",
+    "interval": null,
+    "crontab": 1,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "expires": null,
+    "enabled": true,
+    "last_run_at": null,
+    "total_run_count": 0,
+    "date_changed": "2016-05-02T20:04:03.772Z",
+    "description": ""
+  }
+},
+
+{
+  "model": "djcelery.periodictask",
+  "pk": 4,
+  "fields": {
+    "name": "auto_check_services",
+    "task": "service_status.tasks.auto_check",
+    "interval": 2,
+    "crontab": null,
+    "args": "[]",
+    "kwargs": "{}",
+    "queue": null,
+    "exchange": null,
+    "routing_key": null,
+    "expires": null,
+    "enabled": true,
+    "last_run_at": "2016-05-02T20:14:03.768Z",
+    "total_run_count": 2,
+    "date_changed": "2016-05-02T20:16:18.651Z",
+    "description": ""
+  }
+}
+]
