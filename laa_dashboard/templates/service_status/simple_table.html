@@ -1,13 +1,35 @@
 <html>
 
-<head><title></title>
+{% load staticfiles %}
 
-  <link href="{% static 'stylesheets/govuk-template.css' %}" media="screen" rel="stylesheet" type="text/css" />
-  <link href="{% static 'stylesheets/fonts.css' %}" media="all" rel="stylesheet" type="text/css" />
-  <link href="{% static 'service_status/main.css' %}" rel="stylesheet" type="text/css"/>
+<head>
+
+  <!--<link href="{% static 'stylesheets/fonts.css' %}" media="all" rel="stylesheet" type="text/css" />-->
+  <!--<link href="{% static 'service_status/main.css' %}" rel="stylesheet" type="text/css"/>-->
 
 <style>
+  html, body, button, input, table, td, th {
+    font-family: "nta", Arial, sans-serif;
+  }
 
+  * {
+    margin: 0;
+  }
+
+  table {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+  }
+
+  html {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+  }
+
+  body {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+  }
 
 </style>
 
@@ -16,8 +38,7 @@
 
 <body>
 
-<table id="status_table" style="width: {{table.width}}, height: {{table.height}}">
-  <caption>View Services</caption>
+<table id="status_table" style="width: {{table.width}}px; height: {{table.height}}px;">
 
   <thead>
         
@@ -39,7 +60,7 @@
 
 </table>
 
-
+<script src="{% static 'service_status/main.js' %}"></script>
 <script>set_cell_colours()</script>
 
 </body>
