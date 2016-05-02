@@ -5,3 +5,4 @@ laa_dashboard/settings/local.py
 staticfiles/
 *.sqlite3
 other/
+celerybeat.pid

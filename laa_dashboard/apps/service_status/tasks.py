@@ -26,9 +26,6 @@ def set_auto_status(status_code):
 @app.task
 def auto_check():
 
-    sys.stdout = open('std_log.txt', 'w')
-    sys.sterr = open('std_err.txt', 'w')
-
     print('***************auto_check**************')
     services = Service.objects.order_by('name')
 
@@ -50,18 +47,3 @@ def auto_check():
 
         service.save()
 
-
-@app.task
-def tta():
-    file = open('celery_test.txt', 'w')
-    file.write('Test')
-    file.close()
-
-    file = open('/Users/jamesnarey/celery_test.txt', 'w')
-    file.write('Test')
-    file.close()
-
-
-@task
-def ttb():
-    print('Test')

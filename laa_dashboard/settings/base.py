@@ -62,16 +62,6 @@ djcelery.setup_loader()
 
 BROKER_URL = 'django://'
 
-# CELERYBEAT_SCHEDULE = {
-#
-#
-#     'test_task': {
-#         'task': 'service_status.tasks.tta',
-#         'schedule': timedelta(seconds=10),
-#         # 'args': (16, 16)
-#     },
-# }
-
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 CELERY_TIMEZONE = 'UTC'

@@ -30,7 +30,7 @@
 
   <tr id="{{service.name}}" class="status_row">
     <td class="large_name_cell">{{ service.name }}</td>
-    <td class="large_auto_status_cell" ></td>
+    <td class="large_auto_status_cell {{service.auto_status|lower}}" ></td>
     <td class="large_manual_status_cell {{service.manual_status|lower}}">{{form.manual_status}}</td>
     <td class="">{{form.notes}}</td>
     <td class=""><input class="form_button" type="submit" value="Submit"/></td>
