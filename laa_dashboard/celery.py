@@ -9,13 +9,14 @@ from django.conf import settings
 # from raven.scripts.runner import send_test_message
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'laa_dashboard.settings')
-app = Celery('service_status')
+
+app = Celery('laa_dashboard')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
-
+# app.autodiscover_tasks()
 # client = None
 # if hasattr(settings, 'RAVEN_CONFIG'):
 #     from raven.contrib.django.models import client
@@ -32,3 +33,14 @@ def debug_task(self):
 # def sentry_test_task():
 #     if client:
 #         send_test_message(client, {})
+
+
+@app.task
+def test_task2():
+    file = open('celery_test.txt', 'w')
+    file.write('Test')
+    file.close()
+
+    file = open('/Users/jamesnarey/celery_test.txt', 'w')
+    file.write('Test')
+    file.close()

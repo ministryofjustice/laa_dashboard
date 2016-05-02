@@ -15,6 +15,7 @@ import sys
 from datetime import timedelta
 from os.path import join, abspath, dirname
 import dj_database_url
+import djcelery
 
 # PATH vars
 
@@ -57,19 +58,31 @@ LOCKDOWN_PASSWORDS = (os.environ.get('VIEWER_PASSWORD'))
 
 # Application definition
 
+djcelery.setup_loader()
+
 BROKER_URL = 'django://'
 
-CELERYBEAT_SCHEDULE = {
-    'auto_check': {
-        'task': 'tasks.auto_check',
-        'schedule': timedelta(minutes=1),
-        # 'args': (16, 16)
-    },
-}
+# CELERYBEAT_SCHEDULE = {
+#
+#
+#     'test_task': {
+#         'task': 'service_status.tasks.tta',
+#         'schedule': timedelta(seconds=10),
+#         # 'args': (16, 16)
+#     },
+# }
+
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 CELERY_TIMEZONE = 'UTC'
 
-CELERY_REDIRECT_STDOUTS = False
+# CELERY_REDIRECT_STDOUTS = False
+
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+
+# CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
+
+# CELERY_IMPORTS = ['service_status.tasks',]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -81,6 +94,7 @@ INSTALLED_APPS = [
     'kombu.transport.django',
     'moj_template',
     'service_status',
+    'djcelery',
 ]
 
 MIDDLEWARE_CLASSES = [
