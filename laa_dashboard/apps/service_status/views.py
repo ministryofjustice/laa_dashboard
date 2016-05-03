@@ -2,6 +2,7 @@ import json
 import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import View, TemplateView
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
@@ -40,40 +41,36 @@ def eval_code(status_code):
     return result
 
 
+class ServiceListView(TemplateView):
 
-@login_required
-def view_services(request):
-
-    print('view_services')
-    print(str(request))
-
-    services = Service.objects.order_by('name').values()
-    template = loader.get_template('service_status/view_services.html')
-    context = RequestContext(request, {'services': services})
-
-    return HttpResponse(template.render(context))
+    def get_context_data(self, **kwargs):
+        context = super(ServiceListView, self).get_context_data(**kwargs)
+        context['services'] = Service.objects.order_by('name').values()
+        return context
 
 
-def simple_table(request):
+class UpdateStatus(ServiceListView):
 
-    print('simple_table')
-    print(str(request))
+    template_name = 'service_status/update_status.html'
 
-    width = request.GET.get('width', default=300)
-    height = request.GET.get('height', default=800)
-    # use_auto = request.GET.get('use_auto', default=False)
 
-    services = Service.objects.order_by('name').values()
+class ViewServices(ServiceListView):
 
-    table = {
-        'width': width,
-        'height': height,
-    }
+    template_name = 'service_status/view_services.html'
 
-    template = loader.get_template('service_status/simple_table.html')
-    context = RequestContext(request, {'services': services, 'table': table})
 
-    return HttpResponse(template.render(context))
+class SimpleTable(ServiceListView):
+
+    template_name = 'service_status/simple_table.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SimpleTable, self).get_context_data(**kwargs)
+        print(context)
+        context['width'] = self.request.GET.get('width', default=300)
+        context['height'] = self.request.GET.get('height', default=800)
+        # context['use_auto'] = self.request.GET.get('use_auto', default=False)
+
+        return context
 
 
 def view_status(request):
@@ -91,17 +88,6 @@ def view_status(request):
 
     template = loader.get_template('service_status/view_status.html')
     context = RequestContext(request, {'service': service})
-
-    return HttpResponse(template.render(context))
-
-
-def update_status(request):
-
-    services = Service.objects.order_by('name').values()
-
-    template = loader.get_template('service_status/update_status.html')
-
-    context = RequestContext(request, {'services': services})
 
     return HttpResponse(template.render(context))
 

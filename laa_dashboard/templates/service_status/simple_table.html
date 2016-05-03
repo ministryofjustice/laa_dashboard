@@ -4,32 +4,28 @@
 
 <head>
 
-  <!--<link href="{% static 'stylesheets/fonts.css' %}" media="all" rel="stylesheet" type="text/css" />-->
-  <!--<link href="{% static 'service_status/main.css' %}" rel="stylesheet" type="text/css"/>-->
-
 <style>
   html, body, button, input, table, td, th {
     font-family: "nta", Arial, sans-serif;
   }
 
-  * {
-    margin: 0;
-  }
-
-  table {
+  html, body, table {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
   }
 
-  html {
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+  th {
+    background-color: #005ea5;
+    color: white;
+    padding: 5px;
   }
 
-  body {
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+  td {
+    padding: 5px;
+    color: white;
+    /*text-align: center;*/
   }
+
 
 </style>
 
@@ -38,7 +34,7 @@
 
 <body>
 
-<table id="status_table" style="width: {{table.width}}px; height: {{table.height}}px;">
+<table id="status_table" style="width: {{width}}px; height: {{height}}px;">
 
   <thead>
         
