@@ -2,7 +2,8 @@ import json
 import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, FormView
+from django.views.generic.edit import BaseFormView
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
@@ -73,51 +74,42 @@ class SimpleTable(ServiceListView):
         return context
 
 
-def view_status(request):
+class ServiceView(TemplateView):
 
-    service_name = request.GET.get('name')
-
-    try:
+    def get_service_model(self):
+        service_name = self.request.GET.get('name')
         service = Service.objects.get(name=service_name)
-    except MultipleObjectsReturned:
-        print('Multiple objects with name!')
-    except ObjectDoesNotExist:
-        print('Object not found')
+        return service
 
-    print(service_name)
+    def get_context_data(self, **kwargs):
+        context = super(ServiceView, self).get_context_data(**kwargs)
+        context['service'] = self.get_service_model()
 
-    template = loader.get_template('service_status/view_status.html')
-    context = RequestContext(request, {'service': service})
-
-    return HttpResponse(template.render(context))
+        return context
 
 
-def edit_status(request):
+class ViewStatus(ServiceView):
 
-    service_name = request.GET.get('name')
+    template_name = 'service_status/view_status.html'
 
-    try:
-        service = Service.objects.get(name=service_name)
-    except MultipleObjectsReturned:
-        print('Multiple objects with name!')
-    except ObjectDoesNotExist:
-        print('Object not found')
 
-    print(service_name)
+class EditStatus(ServiceView, BaseFormView):
 
-    if request.method == 'POST':
+    template_name = 'service_status/edit_status.html'
+
+    def post(self, request, *args, **kwargs):
+        service = self.get_service_model()
         form = ServiceForm(request.POST, instance=service)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('../update_status/')
 
-    else:
+    def get(self, request, *args, **kwargs):
+        service = self.get_service_model()
         form = ServiceForm(instance=service)
-
-    template = loader.get_template('service_status/edit_status.html')
-    context = RequestContext(request, {'form': form, 'service': service})
-
-    return HttpResponse(template.render(context))
+        template = loader.get_template(self.template_name)
+        context = RequestContext(self.request, {'form': form, 'service': service})
+        return HttpResponse(template.render(context))
 
 
 def check_all_services(request):
