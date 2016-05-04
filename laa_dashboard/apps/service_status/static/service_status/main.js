@@ -135,6 +135,39 @@ function update_status_elements(response) {
 
 }
 
+
+
+function update_colour_class(target_element, colour) {
+
+  var colours = ['red', 'amber', 'green']
+
+  for (var i = 0; i < colours.length; i++) {
+    if ($(target_element).hasClass(colours[i])) {
+      target_element.classList.remove(colours[i]);
+    }
+  }
+
+  target_element.classList.add(colour)
+
+}
+
+function set_select_box_class() {
+  console.log("Change registered");
+  var colour_class = event.target.value;
+  update_colour_class(event.target, colour_class);
+  set_cell_colours();
+}
+
+function add_select_box_events() {
+
+  var select_boxes =  document.getElementsByTagName("select");
+
+  for (var i = 0; i < select_boxes.length; i++) {
+    select_boxes[i].onchange = set_select_box_class;
+  }
+
+}
+
 //
 // function update_status_elements(response) {
 //
