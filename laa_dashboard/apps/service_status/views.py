@@ -3,7 +3,7 @@ import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, FormView
-from django.views.generic.edit import BaseFormView
+from django.views.generic.edit import BaseFormView, UpdateView
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
@@ -26,7 +26,7 @@ class ViewServicesList(ServiceListView):
 
     def get_context_data(self, **kwargs):
         context = super(ViewServicesList, self).get_context_data(**kwargs)
-        context['service_click_link'] = '../view_status/'
+        context['service_click_link'] = '../view_status'
         return context
 
 
@@ -34,7 +34,7 @@ class UpdateServicesList(ServiceListView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateServicesList, self).get_context_data(**kwargs)
-        context['service_click_link'] = '../update_status/'
+        context['service_click_link'] = '../update_status'
         return context
 
 
@@ -70,17 +70,44 @@ class GetStatuses(View):
 class SingleServiceView(TemplateView):
 
     template_name = 'service_status/single_service.html'
-
-    def get_service_model(self):
-        service_name = self.request.GET.get('name')
-        service = Service.objects.get(name=service_name)
-        return service
+    #
+    # def get_service_model(self, **kwargs):
+    #     # service_name =
+    #     # service_name = self.kwargs['name']
+    #     # service_name = self.request.GET.get('name')
+    #     service = Service.objects.get(name=service_name)
+    #     return service
+    #
+    # # def post_get_service_model(self):
+    # #     service_name = self.request.POST.get('name')
+    # #     service = Service.objects.get(name=service_name)
+    # #     return service
+    #
 
     def get_context_data(self, **kwargs):
         context = super(SingleServiceView, self).get_context_data(**kwargs)
-        context['service'] = self.get_service_model()
+        service_name = self.kwargs['name']
+        context['service'] = Service.objects.get(name=service_name)
 
         return context
+
+
+# class TestView(SingleServiceView):
+#
+#     # def post(self, request, *args, **kwargs):
+#     #     service = self.post_get_service_model()
+#     #     form = ServiceForm(request.POST, instance=service)
+#     #     if form.is_valid():
+#     #         form.save()
+#     #         return HttpResponseRedirect('../update_status/')
+#
+#     def get(self, request, *args, **kwargs):
+#         service_name = self.kwargs['name']
+#         service = Service.objects.get(name=service_name)
+#         form = ServiceForm(instance=service)
+#         template = loader.get_template(self.template_name)
+#         context = RequestContext(self.request, {'form': form, 'service': service})
+#         return HttpResponse(template.render(context))
 
 
 class ViewServiceStatus(SingleServiceView):
@@ -88,23 +115,34 @@ class ViewServiceStatus(SingleServiceView):
     pass
 
 
+# class UpdateServiceStatus(UpdateView):
+#
+#     template_name = 'service_status/single_service.html'
+#
+#     model = Service
+#     fields = ['manual_status', 'notes']
+
+
 class UpdateServiceStatus(SingleServiceView, BaseFormView):
 
+    # service_name = request.GET.get('name')
+    # service = Service.objects.get(name=service_name)
+
     def post(self, request, *args, **kwargs):
-        service = self.get_service_model()
+        service_name = self.kwargs['name']
+        service = Service.objects.get(name=service_name)
         form = ServiceForm(request.POST, instance=service)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('../update_status/')
 
     def get(self, request, *args, **kwargs):
-        service = self.get_service_model()
+        service_name = self.kwargs['name']
+        service = Service.objects.get(name=service_name)
         form = ServiceForm(instance=service)
         template = loader.get_template(self.template_name)
         context = RequestContext(self.request, {'form': form, 'service': service})
         return HttpResponse(template.render(context))
-
-
 
 
 
