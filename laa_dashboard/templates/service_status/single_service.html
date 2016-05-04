@@ -24,9 +24,9 @@
           
       </thead>
 
-      <tr id="{{service.name}}" class="status_row">
+      <tr class="status_row">
         <td class="large_name_cell">{{ service.name }}</td>
-        <td class="large_auto_status_cell {{service.auto_status|lower}}"></td>
+        <td class="large_auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
         <td class="large_manual_status_cell {{service.manual_status|lower}}">
           {% if form %}
             {{form.manual_status}}

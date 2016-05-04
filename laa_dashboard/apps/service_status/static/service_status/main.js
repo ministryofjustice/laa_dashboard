@@ -2,29 +2,61 @@
  * Created by jamesnarey on 29/04/2016.
  */
 
+// function set_cell_colours() {
+//
+//   var ok_hex_colour = '#009900';
+//   var not_ok_hex_colour = '#e60000';
+//
+//   console.log('***********update_cell_colours called*******************')
+//
+//   var trueCells = document.getElementsByClassName("true");
+//
+//   for (var i = 0; i < trueCells.length; i++) {
+//
+//     trueCells[i].style.backgroundColor = ok_hex_colour;
+//   }
+//
+//   var falseCells = document.getElementsByClassName("false");
+//
+//   for (var i = 0; i < falseCells.length; i++) {
+//
+//     falseCells[i].style.backgroundColor = not_ok_hex_colour;
+//   }
+//
+//
+// }
+
 function set_cell_colours() {
 
-  var ok_hex_colour = '#009900';
-  var not_ok_hex_colour = '#e60000';
+  var green_hex_colour = '#009900';
+  var amber_hex_colour = '#ff6600';
+  var red_hex_colour = '#e60000';
 
-  console.log('***********update_cell_colours called*******************')
+  console.log('***********new_update_cell_colours called*******************')
 
-  var trueCells = document.getElementsByClassName("true");
+  var greenCells = document.getElementsByClassName("green");
 
-  for (var i = 0; i < trueCells.length; i++) {
+  for (var i = 0; i < greenCells.length; i++) {
 
-    trueCells[i].style.backgroundColor = ok_hex_colour;
+    greenCells[i].style.backgroundColor = green_hex_colour;
   }
 
-  var falseCells = document.getElementsByClassName("false");
+  var amberCells = document.getElementsByClassName("amber");
 
-  for (var i = 0; i < falseCells.length; i++) {
+  for (var i = 0; i < amberCells.length; i++) {
 
-    falseCells[i].style.backgroundColor = not_ok_hex_colour;
+    amberCells[i].style.backgroundColor = amber_hex_colour;
   }
 
+  var redCells = document.getElementsByClassName("red");
+
+  for (var i = 0; i < redCells.length; i++) {
+
+    redCells[i].style.backgroundColor = red_hex_colour;
+  }
 
 }
+
 
 function get_statuses() {
   console.log("Get statuses request made")
@@ -97,7 +129,7 @@ function update_status_elements(response) {
 
       }
     }
-    
+
 
   });
 

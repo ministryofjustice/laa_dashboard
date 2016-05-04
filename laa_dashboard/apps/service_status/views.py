@@ -88,6 +88,7 @@ class ViewServiceStatus(SingleServiceView):
 
 class UpdateServiceStatus(UpdateView):
     template_name = 'service_status/single_service.html'
+    success_url = '/services/update_services/'
     model = Service
     form_class = ServiceForm
     slug_field = 'name'
