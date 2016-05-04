@@ -12,13 +12,13 @@ import requests
 from celery import task
 
 
-def set_auto_status(status_code):
+def get_status_colour(status_code):
     ok_status_codes = [302, 200]
 
     if status_code in ok_status_codes:
-        auto_status = True
+        auto_status = 'green'
     else:
-        auto_status = False
+        auto_status = 'red'
 
     return auto_status
 
@@ -40,7 +40,7 @@ def auto_check():
         if r.status_code:
             service.last_status_code = r.status_code
             service.last_check_time = datetime.now()
-            service.auto_status = set_auto_status(r.status_code)
+            service.auto_status = get_status_colour(r.status_code)
         else:
             service.last_status_code = 0
             service.last_check_time = timezone.now()

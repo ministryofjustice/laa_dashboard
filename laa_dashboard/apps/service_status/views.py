@@ -22,23 +22,19 @@ class ServiceListView(TemplateView):
         return context
 
 
-class ViewServices(ServiceListView):
-
-    # template_name = 'service_status/view_services.html'
+class ViewServicesList(ServiceListView):
 
     def get_context_data(self, **kwargs):
-        context = super(ViewServices, self).get_context_data(**kwargs)
+        context = super(ViewServicesList, self).get_context_data(**kwargs)
         context['service_click_link'] = '../view_status/'
         return context
 
 
-class UpdateStatus(ServiceListView):
-
-    # template_name = 'service_status/update_status.html'
+class UpdateServicesList(ServiceListView):
 
     def get_context_data(self, **kwargs):
-        context = super(UpdateStatus, self).get_context_data(**kwargs)
-        context['service_click_link'] = '../edit_status/'
+        context = super(UpdateServicesList, self).get_context_data(**kwargs)
+        context['service_click_link'] = '../update_status/'
         return context
 
 
@@ -71,7 +67,7 @@ class GetStatuses(View):
         return JsonResponse(response, safe=False)
 
 
-class ServiceView(TemplateView):
+class SingleServiceView(TemplateView):
 
     template_name = 'service_status/single_service.html'
 
@@ -81,22 +77,18 @@ class ServiceView(TemplateView):
         return service
 
     def get_context_data(self, **kwargs):
-        context = super(ServiceView, self).get_context_data(**kwargs)
+        context = super(SingleServiceView, self).get_context_data(**kwargs)
         context['service'] = self.get_service_model()
 
         return context
 
 
-class ViewStatus(ServiceView):
+class ViewServiceStatus(SingleServiceView):
 
     pass
 
-    # template_name = 'service_status/view_status.html'
 
-
-class EditStatus(ServiceView, BaseFormView):
-
-    # template_name = 'service_status/edit_status.html'
+class UpdateServiceStatus(SingleServiceView, BaseFormView):
 
     def post(self, request, *args, **kwargs):
         service = self.get_service_model()
