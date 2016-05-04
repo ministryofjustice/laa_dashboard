@@ -86,21 +86,12 @@ class ViewServiceStatus(SingleServiceView):
     pass
 
 
-class UpdateServiceStatus(SingleServiceView, BaseFormView):
-
-    def post(self, request, *args, **kwargs):
-        form = ServiceForm(request.POST, instance=self.get_service_model())
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('../../update_services/')
-
-    def get(self, request, *args, **kwargs):
-        service = self.get_service_model()
-        form = ServiceForm(request.POST, instance=service)
-        template = loader.get_template(self.template_name)
-        context = RequestContext(self.request, {'form': form, 'service': service})
-        return HttpResponse(template.render(context))
-
+class UpdateServiceStatus(UpdateView):
+    template_name = 'service_status/single_service.html'
+    model = Service
+    form_class = ServiceForm
+    slug_field = 'name'
+    slug_url_kwarg = 'name'
 
 
 
