@@ -70,44 +70,15 @@ class GetStatuses(View):
 class SingleServiceView(TemplateView):
 
     template_name = 'service_status/single_service.html'
-    #
-    # def get_service_model(self, **kwargs):
-    #     # service_name =
-    #     # service_name = self.kwargs['name']
-    #     # service_name = self.request.GET.get('name')
-    #     service = Service.objects.get(name=service_name)
-    #     return service
-    #
-    # # def post_get_service_model(self):
-    # #     service_name = self.request.POST.get('name')
-    # #     service = Service.objects.get(name=service_name)
-    # #     return service
-    #
+
+    def get_service_model(self):
+        service_name = self.kwargs['name']
+        return Service.objects.get(name=service_name)
 
     def get_context_data(self, **kwargs):
         context = super(SingleServiceView, self).get_context_data(**kwargs)
-        service_name = self.kwargs['name']
-        context['service'] = Service.objects.get(name=service_name)
-
+        context['service'] = self.get_service_model()
         return context
-
-
-# class TestView(SingleServiceView):
-#
-#     # def post(self, request, *args, **kwargs):
-#     #     service = self.post_get_service_model()
-#     #     form = ServiceForm(request.POST, instance=service)
-#     #     if form.is_valid():
-#     #         form.save()
-#     #         return HttpResponseRedirect('../update_status/')
-#
-#     def get(self, request, *args, **kwargs):
-#         service_name = self.kwargs['name']
-#         service = Service.objects.get(name=service_name)
-#         form = ServiceForm(instance=service)
-#         template = loader.get_template(self.template_name)
-#         context = RequestContext(self.request, {'form': form, 'service': service})
-#         return HttpResponse(template.render(context))
 
 
 class ViewServiceStatus(SingleServiceView):
@@ -115,31 +86,17 @@ class ViewServiceStatus(SingleServiceView):
     pass
 
 
-# class UpdateServiceStatus(UpdateView):
-#
-#     template_name = 'service_status/single_service.html'
-#
-#     model = Service
-#     fields = ['manual_status', 'notes']
-
-
 class UpdateServiceStatus(SingleServiceView, BaseFormView):
 
-    # service_name = request.GET.get('name')
-    # service = Service.objects.get(name=service_name)
-
     def post(self, request, *args, **kwargs):
-        service_name = self.kwargs['name']
-        service = Service.objects.get(name=service_name)
-        form = ServiceForm(request.POST, instance=service)
+        form = ServiceForm(request.POST, instance=self.get_service_model())
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('../update_status/')
+            return HttpResponseRedirect('../../update_services/')
 
     def get(self, request, *args, **kwargs):
-        service_name = self.kwargs['name']
-        service = Service.objects.get(name=service_name)
-        form = ServiceForm(instance=service)
+        service = self.get_service_model()
+        form = ServiceForm(request.POST, instance=service)
         template = loader.get_template(self.template_name)
         context = RequestContext(self.request, {'form': form, 'service': service})
         return HttpResponse(template.render(context))
