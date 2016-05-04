@@ -7,42 +7,14 @@ from django.views.generic.edit import BaseFormView
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.utils import timezone
 from .models import Service
-from .forms import ServiceForm, ServiceFormSet
-
-
-# ok_status_codes = [302, 200]
-
-# ok_hex_colour = '#009900'
-# not_ok_hex_colour = '#e60000'
-
-
-def get_status_code(url, verify=False):
-    # try:
-    #     r = requests.get(url, verify=verify, timeout=5)
-    #     result = r.status_code
-    # except:
-    #     print('Error making request')
-    #     result = 0
-
-    r = requests.get(url, verify=verify, timeout=5)
-    result = r.status_code
-
-    return result
-
-
-def eval_code(status_code):
-
-    local_ok_status_codes = [302, 200]
-    if status_code in local_ok_status_codes:
-        result = True
-    else:
-        result = False
-
-    return result
+from .forms import ServiceForm
 
 
 class ServiceListView(TemplateView):
+
+    template_name = 'service_status/service_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(ServiceListView, self).get_context_data(**kwargs)
@@ -50,14 +22,24 @@ class ServiceListView(TemplateView):
         return context
 
 
-class UpdateStatus(ServiceListView):
-
-    template_name = 'service_status/update_status.html'
-
-
 class ViewServices(ServiceListView):
 
-    template_name = 'service_status/view_services.html'
+    # template_name = 'service_status/view_services.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewServices, self).get_context_data(**kwargs)
+        context['service_click_link'] = '../view_status/'
+        return context
+
+
+class UpdateStatus(ServiceListView):
+
+    # template_name = 'service_status/update_status.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateStatus, self).get_context_data(**kwargs)
+        context['service_click_link'] = '../edit_status/'
+        return context
 
 
 class SimpleTable(ServiceListView):
@@ -70,11 +52,28 @@ class SimpleTable(ServiceListView):
         context['width'] = self.request.GET.get('width', default=300)
         context['height'] = self.request.GET.get('height', default=800)
         # context['use_auto'] = self.request.GET.get('use_auto', default=False)
+        context['last_refresh'] = timezone.now()
 
         return context
 
 
+class GetStatuses(View):
+
+    def get(self, request, *args, **kwargs):
+        services = Service.objects.order_by('name')
+        response = []
+        for service in services:
+            response.append({'name': service.name,
+                             'auto_status': service.auto_status,
+                             'manual_status': service.manual_status
+                             })
+
+        return JsonResponse(response, safe=False)
+
+
 class ServiceView(TemplateView):
+
+    template_name = 'service_status/single_service.html'
 
     def get_service_model(self):
         service_name = self.request.GET.get('name')
@@ -90,12 +89,14 @@ class ServiceView(TemplateView):
 
 class ViewStatus(ServiceView):
 
-    template_name = 'service_status/view_status.html'
+    pass
+
+    # template_name = 'service_status/view_status.html'
 
 
 class EditStatus(ServiceView, BaseFormView):
 
-    template_name = 'service_status/edit_status.html'
+    # template_name = 'service_status/edit_status.html'
 
     def post(self, request, *args, **kwargs):
         service = self.get_service_model()
@@ -112,21 +113,6 @@ class EditStatus(ServiceView, BaseFormView):
         return HttpResponse(template.render(context))
 
 
-def check_all_services(request):
-
-    print('check_all_services')
-    print(str(request))
-    services = Service.objects.order_by('name')
-    statuses = {}
-
-    for service in services:
-
-        if service.auto_status:
-            statuses[service.name] = True
-        else:
-            statuses[service.name] = False
-
-    return JsonResponse(statuses)
 
 
 

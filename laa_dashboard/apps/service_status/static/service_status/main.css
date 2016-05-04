@@ -1,5 +1,5 @@
 
-#status_table, #service_select_table, #edit_table, #view_table {
+.service_list_table, #edit_table, #view_table {
     margin-left: auto;
     margin-right: auto;
     /*border: 1px solid black;*/
@@ -22,7 +22,7 @@
 
 }
 
-.status_row {
+.service_list_row {
 
     border: 1px solid black;
 }

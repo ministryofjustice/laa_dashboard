@@ -4,24 +4,13 @@ import os
 
 from celery import Celery
 from django.conf import settings
-# from raven.contrib.celery import register_logger_signal, register_signal
-# set the default Django settings module for the 'celery' program.
-# from raven.scripts.runner import send_test_message
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'laa_dashboard.settings')
 
 app = Celery('laa_dashboard')
 
-# Using a string here means the worker will not have to
-# pickle the object when using Windows.
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
-# app.autodiscover_tasks()
-# client = None
-# if hasattr(settings, 'RAVEN_CONFIG'):
-#     from raven.contrib.django.models import client
-#     register_logger_signal(client)
-#     register_signal(client)
 
 
 @app.task(bind=True)
@@ -29,18 +18,3 @@ def debug_task(self):
     print('Request: {0!r}'.format(self.request))
 
 
-# @app.task()
-# def sentry_test_task():
-#     if client:
-#         send_test_message(client, {})
-
-
-@app.task
-def test_task2():
-    file = open('celery_test.txt', 'w')
-    file.write('Test')
-    file.close()
-
-    file = open('/Users/jamesnarey/celery_test.txt', 'w')
-    file.write('Test')
-    file.close()

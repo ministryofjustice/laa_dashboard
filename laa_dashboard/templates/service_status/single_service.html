@@ -1,0 +1,58 @@
+{% extends 'service_status/common.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+  {% if form %}
+    <form action="#" method="post">{% csrf_token %}
+  {% endif %}
+
+    <table id="edit_table">
+      <caption>Update Service</caption>
+
+      <thead>
+            
+      <tr>
+              
+        <th class="numeric" scope="col"></th>
+        <th class="numeric" scope="col">Auto Check</th> 
+        <th class="numeric" scope="col">Status</th>
+        <th class="numeric" scope="col">Notes</th>
+              
+      </tr>
+          
+      </thead>
+
+      <tr id="{{service.name}}" class="status_row">
+        <td class="large_name_cell">{{ service.name }}</td>
+        <td class="large_auto_status_cell {{service.auto_status|lower}}"></td>
+        <td class="large_manual_status_cell {{service.manual_status|lower}}">
+          {% if form %}
+            {{form.manual_status}}
+          {% endif %}
+        </td>
+
+          {% if form %}
+            <td class="">{{form.notes}}</td>
+            <td class=""><input class="form_button" type="submit" value="Submit"/></td>
+          {% else %}
+            <td class="notes_view_cell">{{service.notes}}</td>
+          {% endif %}
+      </tr>
+
+
+    </table>
+
+  {% if form %}
+    </form>
+  {% endif %}
+
+{% endblock %}
+
+{% block body_end %}
+<script src="{% static 'service_status/ajax_csrf.js' %}"></script>
+<script src="{% static 'service_status/main.js' %}"></script>
+<script>set_cell_colours();</script>
+{% endblock %}
+
