@@ -5,8 +5,8 @@
 {% block content %}
 <div class="main_column">
   {% if form %}
-    <form action="#" method="post">{% csrf_token %}
-  {% endif %}
+  <form action="#" method="post">{% csrf_token %}
+    {% endif %}
 
     <table id="single_service_table">
       <caption>{{caption}}: {{service.name}}</caption>
@@ -15,7 +15,8 @@
             
       <tr>
 
-        <th class="numeric" scope="col">Auto</th> 
+        <th class="numeric" scope="col">Auto</th>
+         
         <th class="numeric" scope="col">Status</th>
         <th class="numeric" scope="col">Notes</th>
               
@@ -27,32 +28,34 @@
         <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
         <td class="manual_status_cell {{service.manual_status|lower}}">
           {% if form %}
-            {{form.manual_status}}
+          {{form.manual_status}}
           {% endif %}
         </td>
 
-          {% if form %}
-            <td class="notes_view_cell">{{form.notes}}</td>
-          {% else %}
-            <td class="notes_view_cell">{{service.notes}}</td>
-          {% endif %}
+        {% if form %}
+        <td class="notes_view_cell">{{form.notes}}</td>
+        {% else %}
+        <td class="notes_view_cell">{{service.notes}}</td>
+        {% endif %}
       </tr>
 
     </table>
 
-  {% if form %}
-    </form>
+    <div class="switch_container">
+      <a class="button_link" href="{{link_data.view_link}}">View</a> |
+      <a class="button_link" href="{{link_data.update_link}}">Update</a>
+    </div>
+    {% if form %}
+    <div class="submit_container">
+      <input class="form_button" type="submit" value="Submit"/>
+    </div>
+    {% endif %}
+
+    {% if form %}
+  </form>
   {% endif %}
 
-  <div class="switch_container">
-    <a class="button_link" href="{{link_data.view_link}}">View</a> |
-    <a class="button_link" href="{{link_data.update_link}}">Update</a>
-  </div>
-  {% if form %}
-  <div class="submit_container">
-    <input class="form_button" type="submit" value="Submit"/>
-  </div>
-  {% endif %}
+
 
 </div>
 {% endblock %}
@@ -60,6 +63,8 @@
 {% block body_end %}
 <script src="{% static 'service_status/ajax_csrf.js' %}"></script>
 <script src="{% static 'service_status/main.js' %}"></script>
-<script>setInitSelectColourClass(); addSelectChangeEvents(); setElementColours(); </script>
+<script>setInitSelectColourClass();
+addSelectChangeEvents();
+setElementColours(); </script>
 {% endblock %}
 

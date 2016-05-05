@@ -6,7 +6,6 @@
 
 }
 
-
 .main_column {
     display: table;
 
@@ -37,15 +36,27 @@
     width: 100px;
 }
 
+.notes_cell {
+    /*max-height: 50px; !important;*/
+    /*height: 50px; !important;*/
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .notes_cell, .notes_view_cell {
-    width: 300px;
+    width: 400px;
+    max-width: 400px;
 }
 
 .notes_view_cell {
-
-    width: 300px;
-    min-width: 300px;
-    height: 150px;
+    overflow: hidden;
+    padding: 0;
+    width: 400px;
+    min-width: 400px;
+    /*height: 150px;*/
+    /*Possibly not needed:- */
     min-height: 150px;
 
 }
@@ -75,20 +86,20 @@ a.button_link:hover {
     float: right;
 }
 
-/*.textarea_container {*/
-    /*border: 1px solid red;*/
-    /*padding: 0;*/
-    /*overflow: hidden;*/
-/*}*/
-
-/*textarea {*/
-/*margin: 0;*/
-/*width: 100%;*/
-/*height: 100%;*/
-/*}*/
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 
 textarea {
+    font-size: inherit;
+    resize: none;
+    border : 0;
+    margin: 0;
     width: 100%;
+    height: 100%;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
@@ -134,8 +145,8 @@ caption {
     font-size: inherit;
     /*margin: 4px 2px;*/
     margin: 0;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
+    /*transition-duration: 0.4s;*/
     cursor: pointer;
 }
 
