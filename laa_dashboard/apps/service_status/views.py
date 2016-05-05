@@ -1,6 +1,7 @@
 import json
 import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, FormView
 from django.views.generic.edit import BaseFormView, UpdateView
@@ -30,7 +31,7 @@ class ViewServicesList(ServiceListView):
         return context
 
 
-class UpdateServicesList(ServiceListView):
+class UpdateServicesList(LoginRequiredMixin, ServiceListView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateServicesList, self).get_context_data(**kwargs)
@@ -86,13 +87,17 @@ class ViewServiceStatus(SingleServiceView):
     pass
 
 
-class UpdateServiceStatus(UpdateView):
+class UpdateServiceStatus(LoginRequiredMixin, UpdateView):
     template_name = 'service_status/single_service.html'
     success_url = '/services/update_services/'
     model = Service
     form_class = ServiceForm
     slug_field = 'name'
     slug_url_kwarg = 'name'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(UpdateServiceStatus, self).get_context_data(**kwargs)
+    #     context['next'] = 
 
 
 

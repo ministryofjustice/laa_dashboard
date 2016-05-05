@@ -63,7 +63,7 @@
     "model": "service_status.service",
     "pk": 7,
     "fields": {
-      "name": "MAAT-LIBRA",
+      "name": "MAAT_LIBRA",
       "url": "https://www.meansassessment.legalservices.gov.uk/mla/",
       "enabled": true
     }

@@ -1,5 +1,5 @@
 
-.service_list_table, #edit_table, #view_table {
+#service_list_table, #edit_table, #view_table {
     margin-left: auto;
     margin-right: auto;
     /*border: 1px solid black;*/
@@ -36,19 +36,6 @@
 }
 
 
-
-/*.password_cell {*/
-/*width: 100px;*/
-/*margin-left: auto;*/
-/*margin-right: auto;*/
-/*}*/
-
-/*.name_cell {*/
-
-/*font-weight: bold;*/
-/*}*/
-
-
 .large_name_cell {
 
     width: 100px;
@@ -57,14 +44,6 @@
 
 
 }
-
-/*.large_auto_status_cell, .large_manual_status_cell {*/
-
-    /*width: 100px;*/
-    /*text-align: center;*/
-    /*border: 1px solid black;*/
-
-/*}*/
 
 .notes_view_cell {
 
