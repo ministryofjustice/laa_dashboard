@@ -3,20 +3,19 @@
 {% load staticfiles %}
 
 {% block content %}
-
+<div class="main_column">
   {% if form %}
     <form action="#" method="post">{% csrf_token %}
   {% endif %}
 
-    <table id="edit_table">
-      <caption>Update Service</caption>
+    <table id="single_service_table">
+      <caption>{{caption}}: {{service.name}}</caption>
 
       <thead>
             
       <tr>
-              
-        <th class="numeric" scope="col"></th>
-        <th class="numeric" scope="col">Auto Check</th> 
+
+        <th class="numeric" scope="col">Auto</th> 
         <th class="numeric" scope="col">Status</th>
         <th class="numeric" scope="col">Notes</th>
               
@@ -25,7 +24,6 @@
       </thead>
 
       <tr class="status_row">
-        <td class="name_cell">{{ service.name }}</td>
         <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
         <td class="manual_status_cell {{service.manual_status|lower}}">
           {% if form %}
@@ -34,13 +32,11 @@
         </td>
 
           {% if form %}
-            <td class="">{{form.notes}}</td>
-            <td class=""><input class="form_button" type="submit" value="Submit"/></td>
+            <td class="notes_view_cell">{{form.notes}}</td>
           {% else %}
             <td class="notes_view_cell">{{service.notes}}</td>
           {% endif %}
       </tr>
-
 
     </table>
 
@@ -48,6 +44,17 @@
     </form>
   {% endif %}
 
+  <div class="switch_container">
+    <a class="button_link" href="{{link_data.view_link}}">View</a> |
+    <a class="button_link" href="{{link_data.update_link}}">Update</a>
+  </div>
+  {% if form %}
+  <div class="submit_container">
+    <input class="form_button" type="submit" value="Submit"/>
+  </div>
+  {% endif %}
+
+</div>
 {% endblock %}
 
 {% block body_end %}

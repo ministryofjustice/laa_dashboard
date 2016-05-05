@@ -17,3 +17,7 @@ div.inner-block {
     display: none;
 }
 
+#proposition-name:hover {
+    text-decoration: none !important;
+}
+

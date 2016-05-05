@@ -25,17 +25,33 @@ class ServiceListView(TemplateView):
 
 class ViewServicesList(ServiceListView):
 
+    link_data = {
+        'url_prefix': '../view_status/',
+        'type': 'View',
+        'view_link': 'javascript:void(0)',
+        'update_link': '/services/update_services/',
+    }
+
     def get_context_data(self, **kwargs):
         context = super(ViewServicesList, self).get_context_data(**kwargs)
-        context['service_click_link'] = '../view_status'
+        context['caption'] = 'View Services'
+        context['link_data'] = self.link_data
         return context
 
 
 class UpdateServicesList(LoginRequiredMixin, ServiceListView):
 
+    link_data = {
+        'url_prefix': '../update_status/',
+        'type': 'Update',
+        'view_link': '/services/view_services/',
+        'update_link': 'javascript:void(0)',
+    }
+
     def get_context_data(self, **kwargs):
         context = super(UpdateServicesList, self).get_context_data(**kwargs)
-        context['service_click_link'] = '../update_status'
+        context['caption'] = 'Update Services'
+        context['link_data'] = self.link_data
         return context
 
 
@@ -84,10 +100,21 @@ class SingleServiceView(TemplateView):
 
 class ViewServiceStatus(SingleServiceView):
 
-    pass
+    def get_context_data(self, **kwargs):
+        context = super(ViewServiceStatus, self).get_context_data(**kwargs)
+
+        link_data = {
+            'view_link': 'javascript:void(0)',
+            'update_link': '/services/update_status/%s/' % (self.kwargs['name']),
+        }
+
+        context['caption'] = 'View Service'
+        context['link_data'] = link_data
+        return context
 
 
 class UpdateServiceStatus(LoginRequiredMixin, UpdateView):
+
     template_name = 'service_status/single_service.html'
     success_url = '/services/update_services/'
     model = Service
@@ -95,9 +122,19 @@ class UpdateServiceStatus(LoginRequiredMixin, UpdateView):
     slug_field = 'name'
     slug_url_kwarg = 'name'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(UpdateServiceStatus, self).get_context_data(**kwargs)
-    #     context['next'] = 
+    def get_context_data(self, **kwargs):
+        context = super(UpdateServiceStatus, self).get_context_data(**kwargs)
+
+        link_data = {
+            'view_link': '/services/view_status/%s/' % (self.kwargs['name']),
+            'update_link': 'javascript:void(0)',
+        }
+
+        context['caption'] = 'Update Service'
+        context['link_data'] = link_data
+        return context
+
+
 
 
 

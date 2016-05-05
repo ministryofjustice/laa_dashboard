@@ -4,17 +4,19 @@
 
 {% block content %}
 
+<div class="main_column">
 <table id="service_list_table">
-  <caption>View Services</caption>
+  <caption>{{caption}}</caption>
 
   <thead>
         
   <tr>
           
     <th class="numeric" scope="col">Service</th>
-    <th class="numeric" scope="col">Auto Check</th> 
+    <th class="numeric" scope="col">Auto</th> 
     <th class="numeric" scope="col">Status</th>
     <th class="numeric" scope="col">Notes</th>
+    <th class="numeric" scope="col"></th>
           
   </tr>
     
@@ -23,15 +25,24 @@
   {% for service in services %}
 
   <tr class="status_row">
-    <td class="name_cell"><a href="{{ service_click_link }}/{{service.name}}/">{{service.name}}</a></td>
-    <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}">{{service.last_status_code}}</td>
+    <td class="name_cell">{{service.name}}</td>
+    <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
     <td class="manual_status_cell {{service.name}} {{service.manual_status|lower}}"></td>
     <td class="notes_cell">{{service.notes}}</td>
+    <td class="link_cell">
+      <a class="button_link" href="{{ link_data.url_prefix }}{{service.name}}/">{{link_data.type}}</a>
+    </td>
   </tr>
 
   {% endfor %}
 
 </table>
+  <div class="switch_container">
+    <a class="button_link" href="{{link_data.view_link}}">View</a> |
+    <a class="button_link" href="{{link_data.update_link}}">Update</a>
+  </div>
+
+</div>
 
 {% endblock %}
 

@@ -13,10 +13,14 @@ from celery import task
 
 
 def get_status_colour(status_code):
-    ok_status_codes = [302, 200]
+    green_status_codes = [302, 200]
+    amber_status_codes = []
+    red_status_codes = []
 
-    if status_code in ok_status_codes:
+    if status_code in green_status_codes:
         auto_status = 'green'
+    elif status_code in amber_status_codes:
+        auto_status = 'amber'
     else:
         auto_status = 'red'
 

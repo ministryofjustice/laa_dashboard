@@ -1,48 +1,44 @@
 
-#service_list_table, #edit_table, #view_table {
+.main_column, #service_list_table, #single_service_table, #view_table, #password_column {
     margin-left: auto;
     margin-right: auto;
-    /*border: 1px solid black;*/
 
+
+}
+
+
+.main_column {
+    display: table;
 
 }
 
 #password_column {
     width: 300px;
-    margin-left: auto;
-    margin-right: auto;
 
 }
 
-#login_table {
-
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-
-}
-
-.service_list_row {
+.name_cell, .auto_status_cell, .manual_status_cell, .notes_cell, .notes_view_cell {
 
     border: 1px solid black;
-}
-
-
-.name_cell, .auto_status_cell, .manual_status_cell, .notes_cell {
-
-    width: 100px;
-    border: 1px solid black;
+    padding: 5px;
 
 }
 
+.auto_status_cell, .manual_status_cell {
+    min-width: 70px;
+}
 
-.large_name_cell {
+.button_cell {
+    text-align: right;
+    padding: 0;
+}
 
+.name_cell {
     width: 100px;
-    text-align: left;
-    font-weight: bold;
+}
 
-
+.notes_cell, .notes_view_cell {
+    width: 300px;
 }
 
 .notes_view_cell {
@@ -51,8 +47,69 @@
     min-width: 300px;
     height: 150px;
     min-height: 150px;
-    border: 1px solid black;
-    padding: 5px;
+
+}
+
+a.button_link {
+    padding: 4px;
+    color: #005ea5;
+    text-decoration: none;
+}
+
+a.button_link:hover {
+    color: white;
+    background-color: #005ea5;
+}
+
+.switch_container {
+    margin-left: 2px;
+    margin-top: 4px;
+    display: inline;
+    float: left;
+}
+
+.submit_container {
+    margin-right: 2px;
+    margin-top: 4px;
+    display: inline;
+    float: right;
+}
+
+/*.textarea_container {*/
+    /*border: 1px solid red;*/
+    /*padding: 0;*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*textarea {*/
+/*margin: 0;*/
+/*width: 100%;*/
+/*height: 100%;*/
+/*}*/
+
+textarea {
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+th {
+
+    text-align: left;
+
+}
+
+/* This id is generated automatically by Django's UpdateView, by joining 'id_' to the field name */
+/*Needs some work for FireFox (and IE?)*/
+select#id_manual_status {
+
+    line-height: 100%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    border: 0;
 }
 
 caption {
@@ -65,17 +122,18 @@ caption {
     font-size: large;
 }
 
+
+/*Blue/white hover button*/
 .form_button {
     background-color: white;
     border: 2px solid #005ea5;
     color: black;
-    /*padding: 10% 10%;*/
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    /*font-size: 16px;*/
     font-size: inherit;
-    margin: 4px 2px;
+    /*margin: 4px 2px;*/
+    margin: 0;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
@@ -86,11 +144,4 @@ caption {
     color: white;
 }
 
-/* This id is generated automatically by Django's UpdateView, by joining 'id_' to the field name */
-/*Needs some work for FireFox (and IE?)*/
-select#id_manual_status {
 
-    line-height: 100%;
-    height: 100%;
-    width: 100%;
-}
