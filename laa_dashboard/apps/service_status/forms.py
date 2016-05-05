@@ -4,7 +4,7 @@ from .models import Service
 
 class ServiceForm(forms.ModelForm):
 
-    notes = forms.Field(widget=forms.Textarea   , required=False)
+    notes = forms.Field(widget=forms.Textarea, required=False)
 
     class Meta:
         model = Service

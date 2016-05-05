@@ -1,4 +1,7 @@
 
+
+/* ----------Main content divs (centre columns)------------ */
+
 .main_column, #service_list_table, #single_service_table, #view_table, #password_column {
     margin-left: auto;
     margin-right: auto;
@@ -16,6 +19,24 @@
 
 }
 
+/* ---------Tables, rows, cells------------ */
+
+caption {
+    text-align: left;
+    font-weight: bold;
+    font-size: larger;
+}
+
+#login_caption {
+    font-size: large;
+}
+
+th {
+
+    text-align: left;
+
+}
+
 .name_cell, .auto_status_cell, .manual_status_cell, .notes_cell, .notes_view_cell {
 
     border: 1px solid black;
@@ -24,42 +45,46 @@
 }
 
 .auto_status_cell, .manual_status_cell {
-    min-width: 70px;
-}
-
-.button_cell {
-    text-align: right;
-    padding: 0;
+    min-width: 90px;
 }
 
 .name_cell {
     width: 100px;
 }
 
+.notes_cell, .notes_view_cell, .notes_edit_cell {
+    width: 400px;
+    max-width: 400px;
+}
+
 .notes_cell {
-    /*max-height: 50px; !important;*/
-    /*height: 50px; !important;*/
     word-wrap: break-word;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.notes_cell, .notes_view_cell {
-    width: 400px;
-    max-width: 400px;
-}
+/* Large note cells */
 
 .notes_view_cell {
-    overflow: hidden;
-    padding: 0;
-    width: 400px;
-    min-width: 400px;
-    /*height: 150px;*/
-    /*Possibly not needed:- */
+
+    font-size: inherit; !important;
+    padding: 4px;
+    height: 150px;
     min-height: 150px;
 
 }
+
+.notes_edit_cell {
+
+    font-size: inherit; !important;
+    overflow: hidden;
+    padding: 0;
+    height: 150px;
+
+}
+
+/* --------------Links-------------- */
 
 a.button_link {
     padding: 4px;
@@ -72,7 +97,10 @@ a.button_link:hover {
     background-color: #005ea5;
 }
 
+/* --------------Link and button containers-------------- */
+
 .switch_container {
+    color: #005ea5;
     margin-left: 2px;
     margin-top: 4px;
     display: inline;
@@ -85,6 +113,8 @@ a.button_link:hover {
     display: inline;
     float: right;
 }
+
+/* --------------Form Elements--------------- */
 
 input:focus,
 select:focus,
@@ -99,22 +129,18 @@ textarea {
     border : 0;
     margin: 0;
     width: 100%;
-    height: 100%;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-th {
 
-    text-align: left;
-
-}
-
-/* This id is generated automatically by Django's UpdateView, by joining 'id_' to the field name */
-/*Needs some work for FireFox (and IE?)*/
+/* This id is generated automatically by Django's
+UpdateView, by joining 'id_' to the field name
+Needs some work for FireFox (and IE?)*/
 select#id_manual_status {
 
+    font-size: inherit;
     line-height: 100%;
     height: 100%;
     width: 100%;
@@ -123,30 +149,17 @@ select#id_manual_status {
     border: 0;
 }
 
-caption {
-    text-align: left;
-    font-weight: bold;
-    font-size: larger;
-}
+/* Buttons */
 
-#login_caption {
-    font-size: large;
-}
-
-
-/*Blue/white hover button*/
 .form_button {
     background-color: white;
     border: 2px solid #005ea5;
-    color: black;
+    color: #005ea5;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: inherit;
-    /*margin: 4px 2px;*/
     margin: 0;
-    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
-    /*transition-duration: 0.4s;*/
     cursor: pointer;
 }
 

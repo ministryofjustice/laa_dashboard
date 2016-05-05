@@ -81,7 +81,7 @@ function updateElementColourClass(target_element, colour) {
 }
 
 
-function selectBoxChange() {
+function selectBoxChange(event) {
   console.log("Change registered");
   var colour_class = event.target.value;
   updateElementColourClass(event.target, colour_class);
@@ -96,13 +96,14 @@ function setInitSelectColourClass() {
   }
 }
 
+
 function addSelectChangeEvents() {
 
-  var select_boxes = document.getElementsByTagName("select");
+    $('select').change(function( event ){ // <---- "event" parameter here
 
-  for (var i = 0; i < select_boxes.length; i++) {
-    select_boxes[i].onchange = selectBoxChange;
-  }
+      selectBoxChange(event)
+
+    });
 
 }
 
