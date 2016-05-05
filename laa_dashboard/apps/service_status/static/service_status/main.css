@@ -30,7 +30,7 @@
 
 .name_cell, .auto_status_cell, .manual_status_cell, .notes_cell {
 
-    width: 200px;
+    width: 100px;
     border: 1px solid black;
 
 }
@@ -58,13 +58,13 @@
 
 }
 
-.large_auto_status_cell, .large_manual_status_cell {
+/*.large_auto_status_cell, .large_manual_status_cell {*/
 
-    width: 100px;
-    text-align: center;
-    border: 1px solid black;
+    /*width: 100px;*/
+    /*text-align: center;*/
+    /*border: 1px solid black;*/
 
-}
+/*}*/
 
 .notes_view_cell {
 
@@ -110,7 +110,7 @@ caption {
 /* This id is generated automatically by Django's UpdateView, by joining 'id_' to the field name */
 /*Needs some work for FireFox (and IE?)*/
 select#id_manual_status {
-    background-color: red;
+
     line-height: 100%;
     height: 100%;
     width: 100%;

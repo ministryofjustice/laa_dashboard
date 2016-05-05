@@ -25,9 +25,9 @@
       </thead>
 
       <tr class="status_row">
-        <td class="large_name_cell">{{ service.name }}</td>
-        <td class="large_auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
-        <td class="large_manual_status_cell {{service.manual_status|lower}}">
+        <td class="name_cell">{{ service.name }}</td>
+        <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
+        <td class="manual_status_cell {{service.manual_status|lower}}">
           {% if form %}
             {{form.manual_status}}
           {% endif %}
@@ -53,6 +53,6 @@
 {% block body_end %}
 <script src="{% static 'service_status/ajax_csrf.js' %}"></script>
 <script src="{% static 'service_status/main.js' %}"></script>
-<script>set_cell_colours(); add_select_box_events();</script>
+<script>initial_select_box_colour_class(); add_select_box_events(); set_cell_colours(); </script>
 {% endblock %}
 
