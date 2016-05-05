@@ -22,8 +22,8 @@
 
   {% for service in services %}
 
-  <tr id="{{service.name}}" class="status_row">
-    <td class="manual_status_cell {{service.manual_status|lower}}">{{service.name}}</td>
+  <tr class="status_row">
+    <td class="manual_status_cell {{service.name}} {{service.manual_status|lower}}">{{service.name}}</td>
   </tr>
 
   {% endfor %}

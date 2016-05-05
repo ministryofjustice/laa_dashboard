@@ -36,7 +36,7 @@ function get_statuses() {
 
     success: function (json) {
       console.log(json);
-      updateStatusElements(json, "auto_cell");
+      updateStatusElements(json, "manual_status_cell");
       setElementColours();
 
     },
@@ -49,20 +49,42 @@ function get_statuses() {
 }
 
 
-function updateStatusElements(response, class_name) {
+// function updateStatusElements(response, class_name) {
+//
+//   for (var i = 0; i < response.length; i++) {
+//
+//     var named_elements = document.getElementsByClassName(response[i]["name"]);
+//
+//     for (var i = 0; i < named_elements.length; i++) {
+//
+//       if ($(named_elements[i]).hasClass(class_name)) {
+//         updateElementColourClass(named_elements[i], response[i]["manual_status"])
+//       }
+//     }
+//
+//   }
+//
+// }
 
-  for (var i = 0; i < response.length; i++) {
 
-    var named_elements = document.getElementsByClassName(value.name);
+function updateStatusElements(response, type_class) {
 
-    for (var i = 0; i < named_elements.length; i++) {
+  $.each(response, function( index, response_item ) {
 
-      if ($(value).hasClass(class_name)) {
-        updateElementColourClass(value, response)
+    var named_elements = document.getElementsByClassName(response_item.name);
+    console.log(response_item.name);
+
+    $.each(named_elements, function( index, named_element ) {
+
+      if ($(named_element).hasClass(type_class)) {
+        console.log(response_item.manual_status);
+        updateElementColourClass(named_element, response_item.manual_status);
       }
-    }
 
-  }
+    });
+
+
+  });
 
 }
 
@@ -76,7 +98,7 @@ function updateElementColourClass(target_element, colour) {
     }
   }
 
-  target_element.classList.add(colour)
+  target_element.classList.add(colour);
 
 }
 
