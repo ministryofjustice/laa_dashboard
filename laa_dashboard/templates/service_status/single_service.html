@@ -62,9 +62,17 @@
 
 {% block body_end %}
 <script src="{% static 'service_status/ajax_csrf.js' %}"></script>
-<script src="{% static 'service_status/main.js' %}"></script>
-<script>setInitSelectColourClass();
-addSelectChangeEvents();
-setElementColours(); </script>
+<script src="{% static 'service_status/colourChangeHelper.js' %}"></script>
+<script src="{% static 'service_status/dynamicSelectBoxSet.js' %}"></script>
+
+
+<script>
+
+  dynamicSelectBoxSet.setInitSelectColourClass();
+  dynamicSelectBoxSet.addSelectChangeEvents();
+  colourChangeHelper.setElementColours();
+
+</script>
+
 {% endblock %}
 
