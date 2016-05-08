@@ -8,11 +8,13 @@ var simpleTable = {
   height : 400,
   useAuto : false,
   showNotes : true,
-  notesHeight : 150,
+  // notesHeight : 150,
   notesFontSize : 10,
   statusField : "manual_status",
   tableElementId : "status_table",
   tableElement : undefined,
+  scrollBoxElementId: "notes_scroll_cell",
+  scrollBoxElement: undefined,
 
   getParameterByName: function (name) {
 
@@ -44,9 +46,15 @@ var simpleTable = {
     this.tableElement = document.getElementById(this.tableElementId);
   },
 
+  getScrollBoxElement: function () {
+    this.scrollBoxElement = document.getElementById(this.scrollBoxElementId);
+  },
+
   setupTable: function () {
     this.tableElement.style.width = this.width;
     this.tableElement.style.height = this.height;
+    // this.scrollBoxElement.style.height = this.notesHeight;
+    this.scrollBoxElement.style.fontSize = this.notesFontSize;
   },
 
   updateSimpleTableElements: function (response, type_class) {
@@ -54,12 +62,12 @@ var simpleTable = {
     $.each(response, function (index, response_item) {
 
       var named_elements = document.getElementsByClassName(response_item.name);
-      console.log(response_item.name);
+      // console.log(response_item.name);
 
       $.each(named_elements, function (index, named_element) {
 
         if ($(named_element).hasClass(type_class)) {
-          console.log(response_item[simpleTable.statusField]);
+          // console.log(response_item[simpleTable.statusField]);
           colourChangeHelper.updateElementColourClass(named_element, response_item[simpleTable.statusField]);
         }
 
@@ -70,13 +78,13 @@ var simpleTable = {
   },
 
   getStatuses: function () {
-    console.log("Get statuses request made")
+    console.log("Get statuses request made");
     $.ajax({
       url: "/services/get_statuses/",
       type: "GET",
 
       success: function (json) {
-        console.log(json);
+        // console.log(json);
         simpleTable.updateSimpleTableElements(json, "manual_status_cell");
         colourChangeHelper.setElementColours();
 
@@ -92,14 +100,28 @@ var simpleTable = {
   startAutoRefresh : function () {
 
     window.setInterval(this.getStatuses, 5000);
+    // window.setInterval(this.scrollNotes, 50);
 
   },
+
+  // scrollNotes : function () {
+  //
+  //   if (simpleTable.scrollBoxElement.scrollTop < simpleTable.scrollBoxElement.scrollHeight - simpleTable.scrollBoxElement.offsetHeight - 1) {
+  //
+  //     simpleTable.scrollBoxElement.scrollTop = simpleTable.scrollBoxElement.scrollTop + 1
+  //   }
+  //   else {
+  //     simpleTable.scrollBoxElement.scrollTop = 0;
+  //   }
+  //   console.log("Scroll_box")
+  // },
 
   init : function () {
 
     this.setUseAuto();
     this.getStatusField();
     this.getTableElement();
+    this.getScrollBoxElement();
     this.setupTable();
     this.startAutoRefresh();
 

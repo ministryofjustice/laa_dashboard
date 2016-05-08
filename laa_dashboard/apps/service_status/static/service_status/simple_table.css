@@ -18,3 +18,32 @@ td {
     color: white;
     /*text-align: center;*/
 }
+
+#notes_scroll_cell {
+    padding: 0px;
+}
+
+#notes_scroll_box {
+    /*max-height: 150px;*/
+    /*max-width: 200px;*/
+    overflow: scroll;
+    height: 150px;
+    width: 200px;
+    border:solid 1px black;
+    color: black;
+    word-wrap: break-word;
+    /*white-space: nowrap;*/
+}
+
+#marquee {
+    top: 6em;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 15s linear infinite;
+}
+
+
+@keyframes marquee {
+    0%   { top:   8em }
+    100% { top: -11em }
+}
