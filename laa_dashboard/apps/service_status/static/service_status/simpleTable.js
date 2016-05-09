@@ -13,8 +13,14 @@ var simpleTable = {
   statusField : "manual_status",
   tableElementId : "status_table",
   tableElement : undefined,
-  scrollBoxElementId: "notes_scroll_cell",
-  scrollBoxElement: undefined,
+  // scrollBoxElementId: "notes_scroll_cell",
+  // scrollBoxElement: undefined,
+
+  notesElementsClass : "notes_div",
+  notesTextElementsClass: "notes_text",
+  activeNotesElements: [],
+  currentNote: 0,
+
 
   getParameterByName: function (name) {
 
@@ -28,10 +34,12 @@ var simpleTable = {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   },
 
+
   setUseAuto: function () {
     var useAutoParam = this.getParameterByName("use_auto");
     return (useAutoParam != null && useAutoParam.toLowerCase() === 'true');
   },
+
 
   getStatusField: function () {
     if (this.useAuto) {
@@ -42,20 +50,49 @@ var simpleTable = {
     }
   },
 
+
   getTableElement: function () {
     this.tableElement = document.getElementById(this.tableElementId);
   },
 
-  getScrollBoxElement: function () {
-    this.scrollBoxElement = document.getElementById(this.scrollBoxElementId);
+
+  // getScrollBoxElement: function () {
+  //   this.scrollBoxElement = document.getElementById(this.scrollBoxElementId);
+  // },
+
+
+  setupNotesElements: function () {
+
+    var allNotesElements = document.getElementsByClassName(this.notesElementsClass);
+
+    for (var i = 0; i < allNotesElements.length; i++) {
+
+      var textSpan = allNotesElements[i].getElementsByClassName(this.notesTextElementsClass)[0];
+
+      // console.log(i + textSpan);
+      // console.log(textSpan.innerHTML);
+
+      var isEmpty = $(textSpan).is(':empty');
+
+      if (!isEmpty) {
+          allNotesElements[i].style.fontSize = this.notesFontSize;
+          this.activeNotesElements.push(allNotesElements[i]);
+      }
+
+    }
+
+    console.log(this.activeNotesElements);
+
   },
+
 
   setupTable: function () {
     this.tableElement.style.width = this.width;
     this.tableElement.style.height = this.height;
     // this.scrollBoxElement.style.height = this.notesHeight;
-    this.scrollBoxElement.style.fontSize = this.notesFontSize;
+
   },
+
 
   updateSimpleTableElements: function (response, type_class) {
 
@@ -77,6 +114,7 @@ var simpleTable = {
 
   },
 
+
   getStatuses: function () {
     console.log("Get statuses request made");
     $.ajax({
@@ -97,34 +135,44 @@ var simpleTable = {
     });
   },
 
+
   startAutoRefresh : function () {
 
     window.setInterval(this.getStatuses, 5000);
-    // window.setInterval(this.scrollNotes, 50);
+    window.setInterval(this.switchNote, 4000);
 
   },
 
-  // scrollNotes : function () {
-  //
-  //   if (simpleTable.scrollBoxElement.scrollTop < simpleTable.scrollBoxElement.scrollHeight - simpleTable.scrollBoxElement.offsetHeight - 1) {
-  //
-  //     simpleTable.scrollBoxElement.scrollTop = simpleTable.scrollBoxElement.scrollTop + 1
-  //   }
-  //   else {
-  //     simpleTable.scrollBoxElement.scrollTop = 0;
-  //   }
-  //   console.log("Scroll_box")
-  // },
+
+  switchNote : function () {
+
+    simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "none";
+
+    if (simpleTable.currentNote < (simpleTable.activeNotesElements.length - 1) ) {
+      simpleTable.currentNote++;
+    }
+    else {
+      simpleTable.currentNote = 0;
+    }
+
+    simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "block";
+
+  },
+
 
   init : function () {
 
     this.setUseAuto();
     this.getStatusField();
     this.getTableElement();
-    this.getScrollBoxElement();
+    // this.getScrollBoxElement();
+    this.setupNotesElements();
     this.setupTable();
     this.startAutoRefresh();
 
+    //Temp one time calls
+    // this.getStatuses();
+    // this.switchNote();
   }
 
 

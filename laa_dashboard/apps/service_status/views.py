@@ -61,12 +61,6 @@ class SimpleTable(ServiceListView):
 
     # def get_context_data(self, **kwargs):
     #     context = super(SimpleTable, self).get_context_data(**kwargs)
-    #     # print(context)
-    #     # context['width'] = self.request.GET.get('width', default=300)
-    #     # context['height'] = self.request.GET.get('height', default=800)
-    #     # context['use_auto'] = self.request.GET.get('use_auto', default=False)
-    #     # context['last_refresh'] = timezone.now()
-    #
     #     return context
 
 
