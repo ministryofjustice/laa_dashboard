@@ -4,23 +4,36 @@
 
 var simpleTable = {
 
-  width : 200,
-  height : 400,
+  width : "200px",
+  height : "400px",
   useAuto : false,
   showNotes : true,
-  // notesHeight : 150,
-  notesFontSize : 10,
+  notesHeight : "150px",
+  notesFontSize : 12,
   statusField : "manual_status",
   tableElementId : "status_table",
   tableElement : undefined,
-  // scrollBoxElementId: "notes_scroll_cell",
-  // scrollBoxElement: undefined,
 
+  notesRowElementID: "notes_row",
   notesElementsClass : "notes_div",
   notesTextElementsClass: "notes_text",
   activeNotesElements: [],
   currentNote: 0,
 
+
+  getParameterWithDefault: function (paramName, defaultValue) {
+    var paramCheck = this.getParameterByName(paramName);
+    if (paramCheck != ("" || null)) {
+
+      if (paramCheck === "true") {return true}
+      else if (paramCheck === "false") {return false}
+      else {return paramCheck}
+
+    }
+    else {
+      return defaultValue;
+    }
+  },
 
   getParameterByName: function (name) {
 
@@ -36,12 +49,15 @@ var simpleTable = {
 
 
   setUseAuto: function () {
-    var useAutoParam = this.getParameterByName("use_auto");
-    return (useAutoParam != null && useAutoParam.toLowerCase() === 'true');
+    this.useAuto = this.getParameterWithDefault("use_auto", this.useAuto);
+  },
+
+  setShowNotes: function () {
+    this.showNotes = this.getParameterWithDefault("show_notes", this.showNotes);
   },
 
 
-  getStatusField: function () {
+  setStatusField: function () {
     if (this.useAuto) {
       this.statusField = "auto_status";
     }
@@ -51,14 +67,57 @@ var simpleTable = {
   },
 
 
-  getTableElement: function () {
+  setTableElement: function () {
     this.tableElement = document.getElementById(this.tableElementId);
   },
 
+  setTableDimensions: function () {
 
-  // getScrollBoxElement: function () {
-  //   this.scrollBoxElement = document.getElementById(this.scrollBoxElementId);
-  // },
+    this.width = this.getParameterWithDefault("width", this.width);
+    this.height = this.getParameterWithDefault("height", this.height);
+    this.notesHeight = this.getParameterWithDefault("notes_height", this.notesHeight);
+
+    // var widthArg;
+    // var heightArg;
+    //
+    // var widthArgLength;
+    // var heightArgLength;
+    //
+    // var lastWidthChar;
+    // var lastHeightChar;
+    //
+    // var widthArgValue;
+    // var heightArgValue;
+    //
+    // widthArg = this.getParameterWithDefault("width");
+    // heightArg = this.getParameterWithDefault("height");
+    //
+    // widthArgLength = widthArg.length;
+    // heightArgLength = heightArg.length;
+    //
+    // lastWidthChar = widthArg.substr(widthArgLength - 1);
+    // lastHeightChar = heightArg.substr(heightArgLength - 1);
+    //
+    // if (lastWidthChar == "%") {
+    //   widthArgValue = widthArg.substr(0, widthArgLength - 1);
+    //   va
+    // }
+    // else {
+    //
+    // }
+    //
+    // if (lastHeightChar == "%") {
+    //   heightArgValue = heightArg.substr(0, heightArgLength - 1);
+    // }
+    // else {
+    //
+    // }
+
+  },
+
+  setNotesFontSize: function () {
+    this.fontSize = this.getParameterWithDefault("notes_font", this.notesFontSize);
+  },
 
 
   setupNotesElements: function () {
@@ -67,12 +126,12 @@ var simpleTable = {
 
     for (var i = 0; i < allNotesElements.length; i++) {
 
-      var textSpan = allNotesElements[i].getElementsByClassName(this.notesTextElementsClass)[0];
+      allNotesElements[i].style.fontSize = this.notesFontSize;
+      allNotesElements[i].style.height = this.notesHeight;
 
-      // console.log(i + textSpan);
-      // console.log(textSpan.innerHTML);
+      var noteText = allNotesElements[i].getElementsByClassName(this.notesTextElementsClass)[0];
 
-      var isEmpty = $(textSpan).is(':empty');
+      var isEmpty = $(noteText).is(':empty');
 
       if (!isEmpty) {
           allNotesElements[i].style.fontSize = this.notesFontSize;
@@ -80,16 +139,20 @@ var simpleTable = {
       }
 
     }
-
-    console.log(this.activeNotesElements);
-
   },
 
 
   setupTable: function () {
     this.tableElement.style.width = this.width;
     this.tableElement.style.height = this.height;
-    // this.scrollBoxElement.style.height = this.notesHeight;
+
+
+    if (this.showNotes == true) {
+
+      this.activeNotesElements[this.currentNote].style.display = "block";
+
+    }
+
 
   },
 
@@ -99,12 +162,10 @@ var simpleTable = {
     $.each(response, function (index, response_item) {
 
       var named_elements = document.getElementsByClassName(response_item.name);
-      // console.log(response_item.name);
 
       $.each(named_elements, function (index, named_element) {
 
         if ($(named_element).hasClass(type_class)) {
-          // console.log(response_item[simpleTable.statusField]);
           colourChangeHelper.updateElementColourClass(named_element, response_item[simpleTable.statusField]);
         }
 
@@ -122,7 +183,6 @@ var simpleTable = {
       type: "GET",
 
       success: function (json) {
-        // console.log(json);
         simpleTable.updateSimpleTableElements(json, "manual_status_cell");
         colourChangeHelper.setElementColours();
 
@@ -139,23 +199,27 @@ var simpleTable = {
   startAutoRefresh : function () {
 
     window.setInterval(this.getStatuses, 5000);
-    window.setInterval(this.switchNote, 4000);
+    window.setInterval(this.switchNote, 10000);
 
   },
 
 
   switchNote : function () {
 
-    simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "none";
+    if (simpleTable.showNotes) {
 
-    if (simpleTable.currentNote < (simpleTable.activeNotesElements.length - 1) ) {
-      simpleTable.currentNote++;
-    }
-    else {
-      simpleTable.currentNote = 0;
-    }
+      simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "none";
 
-    simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "block";
+      if (simpleTable.currentNote < (simpleTable.activeNotesElements.length - 1)) {
+        simpleTable.currentNote++;
+      }
+      else {
+        simpleTable.currentNote = 0;
+      }
+
+      simpleTable.activeNotesElements[simpleTable.currentNote].style.display = "block";
+
+    }
 
   },
 
@@ -163,16 +227,17 @@ var simpleTable = {
   init : function () {
 
     this.setUseAuto();
-    this.getStatusField();
-    this.getTableElement();
-    // this.getScrollBoxElement();
+    this.setShowNotes();
+    this.setStatusField();
+    this.setTableElement();
+    this.setTableDimensions();
+    this.setNotesFontSize();
+
+    //setupNotesElements and setupTable must be run after all the get elements.
     this.setupNotesElements();
     this.setupTable();
     this.startAutoRefresh();
 
-    //Temp one time calls
-    // this.getStatuses();
-    // this.switchNote();
   }
 
 

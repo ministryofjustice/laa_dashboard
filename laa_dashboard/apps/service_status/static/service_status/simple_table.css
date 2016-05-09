@@ -30,15 +30,13 @@ td {
 .notes_div {
 
     display: none;
-    /*max-height: 150px;*/
-    /*max-width: 200px;*/
+    padding: 5px;
     overflow: hidden;
     height: 150px;
-    /*width: 200px;*/
     border:solid 1px black;
     color: black;
     word-wrap: break-word;
-    /*white-space: nowrap;*/
+
 }
 
 .notes_heading {
@@ -50,24 +48,3 @@ td {
 }
 
 
-/*@keyframes marquee {*/
-    /*0%   { top:   8em }*/
-    /*100% { top: -11em }*/
-
-/*}*/
-
-/*@keyframes marquee {*/
-    /*0%   { transform: translateY(0); }*/
-    /*100% { transform: translateY(-50%); }*/
-    /*101% { transform: translateY(0); }*/
-
-/*}*/
-
-/*#marquee {*/
-    /*top: 6em;*/
-    /*position: relative;*/
-    /*box-sizing: border-box;*/
-    /*animation: marquee 15s linear infinite;*/
-
-
-/*}*/
