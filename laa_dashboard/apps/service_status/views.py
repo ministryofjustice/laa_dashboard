@@ -72,7 +72,8 @@ class GetStatuses(View):
         for service in services:
             response.append({'name': service.name,
                              'auto_status': service.auto_status,
-                             'manual_status': service.manual_status
+                             'manual_status': service.manual_status,
+                             'notes': service.notes,
                              })
 
         return JsonResponse(response, safe=False)

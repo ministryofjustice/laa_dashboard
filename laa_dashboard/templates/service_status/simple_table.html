@@ -30,19 +30,19 @@
 
   {% endfor %}
 
-  <tr class="notes_row">
-    <td class="notes_cell">
+  <tr id="notes_row">
+    <td id="notes_cell">
 
-      {% for service in services %}
-      <div class="notes_div">
-        <span class="notes_heading">{{service.name}}</span>
+
+      <div id="notes_div">
+        <span id="notes_heading"></span>
         <br>
         <br>
-        <span class="notes_text">{{service.notes}}</span>
+        <span id="notes_text"></span>
         <br>
         <br>
       </div>
-      {% endfor %}
+
 
     </td>
   </tr>

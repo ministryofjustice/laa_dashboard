@@ -19,31 +19,33 @@ td {
     /*text-align: center;*/
 }
 
-.notes_row {
-
+#notes_row {
+    display: none;
+    padding: 0;
 }
 
-.notes_cell {
+#notes_cell {
     padding: 0px;
 }
 
-.notes_div {
+#notes_div {
 
-    display: none;
     padding: 5px;
     overflow: hidden;
     height: 150px;
+    width: 200px;
     border:solid 1px black;
     color: black;
     word-wrap: break-word;
+    margin: 0;
 
 }
 
-.notes_heading {
+#notes_heading {
     font-weight: bold;
 }
 
-.notes_text {
+#notes_text {
 
 }
 
