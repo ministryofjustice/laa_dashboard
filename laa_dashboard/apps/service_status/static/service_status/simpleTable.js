@@ -10,23 +10,29 @@ var simpleTable = {
   showNotes : true,
   notesHeight : "150px",
   notesFontSize : 12,
-  statusJSONField : "manual_status",
-  statusIndicatorClass: "manual_status_cell",
+  statusFontSize: 14,
 
+  headerElementID: "header",
+  headerElement: undefined,
+  statusIndicatorClass: "status_cell",
+  statusIndicatorElements: undefined,
   tableElementID : "status_table",
   tableElement : undefined,
   notesRowElementID: "notes_row",
   notesRowElement: undefined,
   notesDivID : "notes_div",
-  notesElement: undefined,
+  notesDiv: undefined,
   notesHeadingElementID: "notes_heading",
   notesHeadingElement: undefined,
   notesTextElementID: "notes_text",
   notesTextElement: undefined,
+
+  statusJSONField : "manual_status",
+  serviceData: [],
   activeNotes: [],
   currentNote: 0,
 
-  serviceData: [],
+
 
 
   getParameterWithDefault: function (paramName, defaultValue) {
@@ -42,6 +48,7 @@ var simpleTable = {
       return defaultValue;
     }
   },
+
 
   getParameterByName: function (name) {
 
@@ -63,6 +70,7 @@ var simpleTable = {
     this.height = this.getParameterWithDefault("height", this.height);
     this.notesHeight = this.getParameterWithDefault("notes_height", this.notesHeight);
     this.fontSize = this.getParameterWithDefault("notes_font", this.notesFontSize);
+    this.statusFontSize = this.getParameterWithDefault("status_font", this.statusFontSize);
   },
 
 
@@ -79,9 +87,11 @@ var simpleTable = {
   setElements: function () {
     this.tableElement = document.getElementById(this.tableElementID);
     this.notesRowElement = document.getElementById(this.notesRowElementID);
-    this.notesElement = document.getElementById(this.notesDivID);
+    this.notesDiv = document.getElementById(this.notesDivID);
     this.notesHeadingElement = document.getElementById(this.notesHeadingElementID);
     this.notesTextElement = document.getElementById(this.notesTextElementID);
+    this.statusIndicatorElements = document.getElementsByClassName(this.statusIndicatorClass);
+    this.headerElement = document.getElementById(this.headerElementID);
   },
 
 
@@ -92,8 +102,6 @@ var simpleTable = {
     for (var i = 0; i < simpleTable.serviceData.length; i++) {
 
       var noteText = simpleTable.serviceData[i].notes;
-
-      console.log(noteText);
 
       if (noteText != "") {
 
@@ -109,7 +117,18 @@ var simpleTable = {
   setupTable: function () {
     this.tableElement.style.width = this.width;
     this.tableElement.style.height = this.height;
-    this.notesElement.style.width = this.width;
+
+    this.headerElement.style.fontSize = this.statusFontSize;
+
+    for (var i = 0; i < this.statusIndicatorElements.length; i++) {
+
+      this.statusIndicatorElements[i].style.fontSize = this.statusFontSize;
+
+    }
+
+    this.notesDiv.style.height = this.notesHeight;
+    this.notesDiv.style.width = this.width;
+    this.notesDiv.style.fontSize = this.fontSize;
 
 
     if (this.showNotes == true) {
@@ -199,6 +218,7 @@ var simpleTable = {
 
     //setActiveNotes and setupTable must be run after all the get elements.
     this.setupTable();
+    this.getData();
     this.startAutoRefresh();
 
   }
@@ -207,4 +227,10 @@ var simpleTable = {
 };
 
 
+//Run on page load
+$(document).ready(function () {
 
+  simpleTable.init()
+
+
+});

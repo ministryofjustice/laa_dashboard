@@ -29,3 +29,12 @@ var dynamicSelectBoxSet = {
   }
 
 };
+
+//Run on page load
+$(document).ready(function () {
+
+  dynamicSelectBoxSet.setInitSelectColourClass();
+  dynamicSelectBoxSet.addSelectChangeEvents();
+
+
+});

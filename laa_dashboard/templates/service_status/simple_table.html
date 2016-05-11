@@ -15,7 +15,7 @@
         
   <tr>
           
-    <th class="numeric" scope="col">Service Status</th>
+    <th id="header" scope="col">Service Status</th>
           
   </tr>
       
@@ -24,7 +24,7 @@
   {% for service in services %}
 
   <tr class="status_row">
-    <td class="manual_status_cell {{service.name}} {{service.manual_status|lower}}">{{service.name}}</td>
+    <td class="status_cell {{service.name}} {{service.manual_status|lower}}">{{service.name}}</td>
   </tr>
 
 
@@ -36,7 +36,6 @@
 
       <div id="notes_div">
         <span id="notes_heading"></span>
-        <br>
         <br>
         <span id="notes_text"></span>
         <br>
@@ -51,11 +50,6 @@
 <script src="{% static 'service_status/jquery-1.11.0.min.js' %}"></script>
 <script src="{% static 'service_status/colourChangeHelper.js' %}"></script>
 <script src="{% static 'service_status/simpleTable.js' %}"></script>
-
-<script>
-  colourChangeHelper.setElementColours();
-  simpleTable.init();
-</script>
 
 </body>
 

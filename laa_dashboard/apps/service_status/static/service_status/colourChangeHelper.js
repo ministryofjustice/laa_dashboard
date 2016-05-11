@@ -43,12 +43,6 @@ var colourChangeHelper = {
 };
 
 
-
-
-
-
-
-
 //Run on script import
 
 console.log("colourChangeHelper.js imported");
@@ -56,7 +50,7 @@ console.log("colourChangeHelper.js imported");
 //Run on page load
 $(document).ready(function () {
 
-  console.log("document ready event");
+  colourChangeHelper.setElementColours();
 
 
 });

@@ -7,13 +7,13 @@ html, body, table {
     padding: 0 0 0 0;
 }
 
-th {
+#header {
     background-color: #005ea5;
     color: white;
     padding: 5px;
 }
 
-td {
+.status_cell {
     padding: 5px;
     color: white;
     /*text-align: center;*/
@@ -43,6 +43,7 @@ td {
 
 #notes_heading {
     font-weight: bold;
+    line-height: 150%;
 }
 
 #notes_text {
