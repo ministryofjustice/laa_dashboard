@@ -37,6 +37,10 @@ th {
 
 }
 
+.auto_header {
+    display: none;
+}
+
 .name_cell, .auto_status_cell, .manual_status_cell, .notes_cell, .notes_view_cell {
 
     border: 1px solid black;
@@ -44,7 +48,12 @@ th {
 
 }
 
-.auto_status_cell, .manual_status_cell {
+.auto_status_cell {
+    min-width: 90px;
+    display: none;
+}
+
+.manual_status_cell {
     min-width: 90px;
 }
 

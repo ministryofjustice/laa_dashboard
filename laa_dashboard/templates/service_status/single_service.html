@@ -15,17 +15,16 @@
             
       <tr>
 
-
-         
-        <th class="numeric" scope="col">Status</th>
-        <th class="numeric" scope="col">Notes</th>
+        <th class="auto_header" scope="col">Auto</th> 
+        <th scope="col">Status</th>
+        <th scope="col">Notes</th>
               
       </tr>
           
       </thead>
 
       <tr class="status_row">
-
+        <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
         <td class="manual_status_cell {{service.manual_status|lower}}">
           {% if form %}
           {{form.manual_status}}
