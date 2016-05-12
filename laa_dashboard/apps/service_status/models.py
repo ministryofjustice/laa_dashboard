@@ -1,8 +1,6 @@
 from django.utils import timezone
 from django.db import models
 
-
-
 class Service(models.Model):
 
     STATUS_COLOURS = (
@@ -23,3 +21,5 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        app_label = 'service_status'

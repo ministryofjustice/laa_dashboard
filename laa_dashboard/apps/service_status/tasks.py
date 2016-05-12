@@ -1,15 +1,20 @@
 from __future__ import absolute_import
-import sys
 from datetime import datetime
 from django.utils import timezone
 
 from laa_dashboard.celery import app
 
-from celery import shared_task
 from .models import Service
 import requests
 
-from celery import task
+# Consider using the lines below to import auto_check.py
+# and assign auto_check to a new, decorated variable, i.e.
+#
+# @app.task
+# decorated_auto_check = tasks.auto_check
+#
+# from pathlib import Path
+# p = Path(__file__).parents[3]
 
 
 def get_status_colour(status_code):
