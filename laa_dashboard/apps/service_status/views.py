@@ -24,7 +24,6 @@ class ServiceListView(TemplateView):
         return context
 
 
-@xframe_options_exempt
 class ViewServicesList(ServiceListView):
 
     link_data = {
@@ -57,7 +56,6 @@ class UpdateServicesList(LoginRequiredMixin, ServiceListView):
         return context
 
 
-@xframe_options_exempt
 class SimpleTable(ServiceListView):
 
     template_name = 'service_status/simple_table.html'
@@ -67,7 +65,6 @@ class SimpleTable(ServiceListView):
     #     return context
 
 
-@xframe_options_exempt
 class GetStatuses(View):
 
     def get(self, request, *args, **kwargs):
