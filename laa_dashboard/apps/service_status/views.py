@@ -9,6 +9,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.utils import timezone
+from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Service
 from .forms import ServiceForm
 
@@ -23,6 +24,7 @@ class ServiceListView(TemplateView):
         return context
 
 
+@xframe_options_exempt
 class ViewServicesList(ServiceListView):
 
     link_data = {
@@ -55,6 +57,7 @@ class UpdateServicesList(LoginRequiredMixin, ServiceListView):
         return context
 
 
+@xframe_options_exempt
 class SimpleTable(ServiceListView):
 
     template_name = 'service_status/simple_table.html'
@@ -64,6 +67,7 @@ class SimpleTable(ServiceListView):
     #     return context
 
 
+@xframe_options_exempt
 class GetStatuses(View):
 
     def get(self, request, *args, **kwargs):

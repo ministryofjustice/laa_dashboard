@@ -33,8 +33,7 @@ var simpleTable = {
   currentNote: 0,
 
 
-
-
+  
   getParameterWithDefault: function (paramName, defaultValue) {
     var paramCheck = this.getParameterByName(paramName);
     if (paramCheck != ("" || null)) {
