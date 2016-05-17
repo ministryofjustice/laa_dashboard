@@ -31,6 +31,8 @@ class ViewServicesList(ServiceListView):
         'type': 'View',
         'view_link': 'javascript:void(0)',
         'update_link': '/services/update_services/',
+        'view_link_text': 'View',
+        'update_link_text': 'Update',
     }
 
     def get_context_data(self, **kwargs):
@@ -47,12 +49,24 @@ class UpdateServicesList(LoginRequiredMixin, ServiceListView):
         'type': 'Update',
         'view_link': '/services/view_services/',
         'update_link': 'javascript:void(0)',
+        'view_link_text': 'View',
+        'update_link_text': 'Update',
     }
 
     def get_context_data(self, **kwargs):
         context = super(UpdateServicesList, self).get_context_data(**kwargs)
         context['caption'] = 'Update Services'
         context['link_data'] = self.link_data
+        return context
+
+
+class TVViewServicesList(ServiceListView):
+
+    template_name = 'service_status/tv_view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TVViewServicesList, self).get_context_data(**kwargs)
+        context['caption'] = 'View Services'
         return context
 
 

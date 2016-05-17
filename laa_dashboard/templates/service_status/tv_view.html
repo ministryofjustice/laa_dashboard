@@ -28,7 +28,7 @@
     <td class="name_cell">{{service.name}}</td>
     <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
     <td class="manual_status_cell {{service.name}} {{service.manual_status|lower}}"></td>
-    <td class="notes_cell">{{service.notes}}</td>
+    <td class="notes_cell {{service.name}}">{{service.notes}}</td>
     <td class="link_cell">
       <a class="button_link" href="{{ link_data.url_prefix }}{{service.name}}/">{{link_data.type}}</a>
     </td>
@@ -37,12 +37,8 @@
   {% endfor %}
 
 </table>
-  <div class="switch_container">
-    <a class="button_link" href="{{link_data.view_link}}">{{link_data.view_link_text}}</a>
-    <a class="button_link" href="{{link_data.update_link}}">{{link_data.update_link_text}}</a>
-  </div>
-
-  <div class="bottom_text">{{link_data.bottom_text}}</div>
+  <br>
+  <div class="bottom_text">Please continue to report IT issues to the Atos Helpdesk on 0800 783 0162</div>
 
 </div>
 
@@ -51,6 +47,6 @@
 {% block body_end %}
 <script src="{% static 'service_status/ajax_csrf.js' %}"></script>
 <script src="{% static 'service_status/colourChangeHelper.js' %}"></script>
-
+<script src="{% static 'service_status/tvTable.js' %}"></script>
 
 {% endblock %}

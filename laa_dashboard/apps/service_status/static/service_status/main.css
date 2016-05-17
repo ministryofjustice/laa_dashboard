@@ -62,8 +62,8 @@ th {
 }
 
 .notes_cell, .notes_view_cell, .notes_edit_cell {
-    width: 400px;
-    max-width: 400px;
+    width: 600px;
+    max-width: 600px;
 }
 
 .notes_cell {
