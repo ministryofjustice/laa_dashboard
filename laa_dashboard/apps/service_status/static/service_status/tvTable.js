@@ -13,6 +13,7 @@ var tvTable = {
 
   notesCellClass: "notes_cell",
   notesCellElements: undefined,
+  statusJSONField: 'manual_status',
   statusIndicatorClass: "manual_status_cell",
   notesField : "notes",
   serviceData: [],
