@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "CCLF",
+      "display_name": "CCLF",
       "url": "https://cclf.legalservices.gov.uk/cclf/AutoLogin",
       "enabled": true
     }
@@ -14,6 +15,7 @@
     "pk": 2,
     "fields": {
       "name": "CCMS",
+      "display_name": "CCMS",
       "url": "https://ccmsebs.lab.gov",
       "enabled": true
     }
@@ -24,6 +26,7 @@
     "pk": 3,
     "fields": {
       "name": "CCR",
+      "display_name": "CCR",
       "url": "https://ccr.legalservices.gov.uk/ccr/AutoLogin",
       "enabled": true
     }
@@ -34,6 +37,7 @@
     "pk": 4,
     "fields": {
       "name": "CWA",
+      "display_name": "CWA",
       "url": "https://lsconlineapps.lab.gov/oa_servlets/AppsLogin",
       "enabled": true
     }
@@ -44,6 +48,7 @@
     "pk": 5,
     "fields": {
       "name": "Eforms",
+      "display_name": "EForms",
       "url": "https://eforms.legalservices.gov.uk/officeforms/ProcessDesktop_sso.ofml",
       "enabled": true
     }
@@ -54,6 +59,7 @@
     "pk": 6,
     "fields": {
       "name": "MAAT",
+      "display_name": "MAAT",
       "url": "https://www.meansassessment.legalservices.gov.uk/",
       "enabled": true
     }
@@ -64,6 +70,7 @@
     "pk": 7,
     "fields": {
       "name": "MAAT_LIBRA",
+      "display_name": "MAAT/LIBRA",
       "url": "https://www.meansassessment.legalservices.gov.uk/mla/",
       "enabled": true
     }
@@ -74,6 +81,7 @@
     "pk": 8,
     "fields": {
       "name": "MI",
+      "display_name": "MI",
       "url": "https://lsconline.lab.gov/lscapps/eric-emi/AutoLoginServlet",
       "enabled": true
     }
@@ -84,6 +92,7 @@
     "pk": 9,
     "fields": {
       "name": "OBIEE",
+      "display_name": "OBIEE",
       "url": "https://obiee.lab.gov/analytics/",
       "enabled": true
     }
@@ -94,6 +103,7 @@
     "pk": 10,
     "fields": {
       "name": "PIMS",
+      "display_name": "PIMS",
       "url": "https://lscprodtad.lab.gov/apex/f?p=200:LOGIN:675858114141001",
       "enabled": true
     }
@@ -104,8 +114,53 @@
     "pk": 11,
     "fields": {
       "name": "Portal",
+      "display_name": "LAA Online Portal",
       "url": "https://lsconlinesso.legalservices.gov.uk/sso/pages/login.jsp",
-      "enabled": false
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 11,
+    "fields": {
+      "name": "Outlook",
+      "display_name": "Outlook",
+      "url": "http://8.8.8.8",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 11,
+    "fields": {
+      "name": "Internet_Intranet",
+      "display_name": "Internet/Intranet",
+      "url": "http://8.8.8.8",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 11,
+    "fields": {
+      "name": "Telephony",
+      "display_name": "Telephony",
+      "url": "http://8.8.8.8",
+      "enabled": true
+    }
+  },
+
+  {
+    "model": "service_status.service",
+    "pk": 11,
+    "fields": {
+      "name": "Remote_Access",
+      "display_name": "Remote Access",
+      "url": "http://8.8.8.8",
+      "enabled": true
     }
   }
 

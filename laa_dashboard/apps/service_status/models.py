@@ -10,6 +10,7 @@ class Service(models.Model):
     )
 
     name = models.CharField(max_length=200)
+    display_name = models.CharField(max_length=200, default='')
     url = models.CharField(max_length=200)
     enabled = models.BooleanField(default=True)
     auto_status = models.CharField(max_length=10, choices=STATUS_COLOURS, default='red')
