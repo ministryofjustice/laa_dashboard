@@ -47,15 +47,15 @@ var tvTable = {
   updateNotes: function () {
 
     $.each(tvTable.serviceData, function (index, response_item) {
-      //console.log(response_item);
+
       var named_elements = document.getElementsByClassName(response_item.name);
 
       $.each(named_elements, function (index, named_element) {
 
         if ($(named_element).hasClass(tvTable.notesCellClass)) {
-          console.log(response_item[tvTable.notesField]);
+
           named_element.innerHTML = response_item[tvTable.notesField];
-          //colourChangeHelper.updateElementColourClass(named_element, response_item[tvTable.statusJSONField]);
+
         }
 
       });
