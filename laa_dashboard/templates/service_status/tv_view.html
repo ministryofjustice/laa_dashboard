@@ -31,19 +31,19 @@
   </thead>
 
   {% for service in services %}
-
+  {% if service.enabled %}
   <tr class="status_row">
     <td class="name_cell">{{service.display_name}}</td>
     <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
     <td class="manual_status_cell {{service.name}} {{service.manual_status|lower}}"></td>
     <td class="notes_cell {{service.name}}">{{service.notes}}</td>
   </tr>
-
+  {% endif %}
   {% endfor %}
 
 </table>
   <br>
-  <div class="bottom_text">Please continue to report IT issues to the Atos Helpdesk on 0800 783 0162</div>
+  <span id="footer_text">Please continue to report IT issues to the Atos Helpdesk on 0800 783 0162<span>
 
 </div>
 

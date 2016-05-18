@@ -181,4 +181,6 @@ select#id_manual_status {
     color: white;
 }
 
-
+#footer_text {
+    font-weight: bold;
+}

@@ -22,11 +22,11 @@
   </thead>
 
   {% for service in services %}
-
+  {% if service.enabled %}
   <tr class="status_row">
     <td class="status_cell {{service.name}} {{service.manual_status|lower}}">{{service.display_name}}</td>
   </tr>
-
+  {% endif %}
 
   {% endfor %}
 

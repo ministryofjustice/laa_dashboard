@@ -23,7 +23,7 @@
   </thead>
 
   {% for service in services %}
-
+  {% if service.enabled %}
   <tr class="status_row">
     <td class="name_cell">{{service.display_name}}</td>
     <td class="auto_status_cell {{service.name}} {{service.auto_status|lower}}"></td>
@@ -33,7 +33,7 @@
       <a class="button_link" href="{{ link_data.url_prefix }}{{service.name}}/">{{link_data.type}}</a>
     </td>
   </tr>
-
+  {% endif %}
   {% endfor %}
 
 </table>

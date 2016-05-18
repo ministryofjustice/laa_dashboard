@@ -122,7 +122,7 @@
 
   {
     "model": "service_status.service",
-    "pk": 11,
+    "pk": 12,
     "fields": {
       "name": "Outlook",
       "display_name": "Outlook",
@@ -133,7 +133,7 @@
 
   {
     "model": "service_status.service",
-    "pk": 11,
+    "pk": 13,
     "fields": {
       "name": "Internet_Intranet",
       "display_name": "Internet/Intranet",
@@ -144,7 +144,7 @@
 
   {
     "model": "service_status.service",
-    "pk": 11,
+    "pk": 14,
     "fields": {
       "name": "Telephony",
       "display_name": "Telephony",
@@ -155,7 +155,7 @@
 
   {
     "model": "service_status.service",
-    "pk": 11,
+    "pk": 15,
     "fields": {
       "name": "Remote_Access",
       "display_name": "Remote Access",

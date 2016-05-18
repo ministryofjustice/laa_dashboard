@@ -13,11 +13,11 @@ class Service(models.Model):
     display_name = models.CharField(max_length=200, default='')
     url = models.CharField(max_length=200)
     enabled = models.BooleanField(default=True)
-    auto_status = models.CharField(max_length=10, choices=STATUS_COLOURS, default='red')
-    manual_status = models.CharField(max_length=10, choices=STATUS_COLOURS, default='red')
+    auto_status = models.CharField(max_length=10, choices=STATUS_COLOURS, default='green')
+    manual_status = models.CharField(max_length=10, choices=STATUS_COLOURS, default='green')
     last_status_code = models.IntegerField(default=0)
     last_check_time = models.DateTimeField(default=timezone.now)
-    notes = models.TextField(default='')
+    notes = models.TextField(default='', blank=True)
 
     def __str__(self):
         return self.name
