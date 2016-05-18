@@ -88,7 +88,7 @@ var tvTable = {
 
   startAutoRefresh : function () {
 
-    window.setInterval(this.getData, 5000);
+    window.setInterval(this.getData, 60000);
 
   },
 

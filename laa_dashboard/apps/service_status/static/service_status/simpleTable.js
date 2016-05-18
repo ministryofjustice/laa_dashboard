@@ -33,7 +33,7 @@ var simpleTable = {
   currentNote: 0,
 
 
-  
+
   getParameterWithDefault: function (paramName, defaultValue) {
     var paramCheck = this.getParameterByName(paramName);
     if (paramCheck != ("" || null)) {
@@ -183,8 +183,8 @@ var simpleTable = {
 
   startAutoRefresh : function () {
 
-    window.setInterval(this.getData, 5000);
-    window.setInterval(this.switchNote, 3000);
+    window.setInterval(this.getData, 60000);
+    window.setInterval(this.switchNote, 10000);
 
   },
 
